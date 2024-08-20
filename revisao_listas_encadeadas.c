@@ -18,22 +18,32 @@ void inserir(Node **head, int n){
     }
 }
 
+void imprimir(Node *head){
+    while(head!=NULL){
+        printf("%d\n", head->data);
+        head = head->next;
+    }
+
+}
+
+void liberar(Node **head){
+    while(*head != NULL){
+        Node *temp = *head;
+        *head = (*head)->next;
+        free(temp);
+    }
+}
+
+
 int main(){
 
     Node *head = NULL;
     inserir(&head, 10);
     inserir(&head, 20);
     Node *current = head;
-    while(current != NULL){
-        printf("%d\n", current->data);
-        current = current->next;
-    }
+    imprimir(current);
 
-    while(head != NULL){
-        Node *temp = head;
-        head = head->next;
-        free(temp);
-    }
+    liberar(&head);
 
     return 0;
 
