@@ -34,15 +34,66 @@ void liberar(Node **head){
     }
 }
 
+int cont_listas(Node *head){
+    int cont = 0;
+    while(head!=NULL){
+        cont++;
+        head = head->next;
+    }
+return cont;
+}
+
+void remover(Node **head, int n){
+    Node *current = *head;
+    Node *previous = NULL;
+
+    while(current != NULL && current->data != n){
+        previous = current;
+        current = current->next;
+    }
+
+    if(current != NULL){
+        if(previous == NULL){
+            *head = current->next;
+        } else {
+            previous->next = current->next;
+        }
+        free(current);
+    }
+}
+
+void remover_ultimo(Node **head){
+    Node *current = *head;
+    Node *previous = NULL;
+
+    while(current->next != NULL){
+        previous = current;
+        current = current->next;
+    }
+
+    if(current != NULL){
+        if(previous == NULL){
+            *head = current->next;
+        } else {
+            previous->next = current->next;
+        }
+        free(current);
+    }
+}
 
 int main(){
 
     Node *head = NULL;
     inserir(&head, 10);
     inserir(&head, 20);
+    inserir(&head, 30);
+    inserir(&head, 40);
+    inserir(&head, 40);
+    remover(&head, 40);
+    remover_ultimo(&head);
     Node *current = head;
     imprimir(current);
-
+    printf("Quantidade de elementos na lista: %d\n", cont_listas(current));
     liberar(&head);
 
     return 0;
