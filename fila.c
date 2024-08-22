@@ -25,7 +25,7 @@ void enfileirar(Node **head, Node **tail, int data){
 
 }
 
-void remover(Node **head, Node **tail){
+void remover(Node **head, Node **tail){ /*Não tenho certeza se está certo*/
 
     if(head!=NULL){
 
