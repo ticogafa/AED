@@ -1,6 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+
+Descrição:
+
+Fila de banco é sempre uma dor de cabeça. No Banco do Brasilo, existem apenas dois caixas para 
+atender as pessoas. Porém, toda hora do almoço é um problema, pois existem duas filas de pessoas e 
+um dos funcionários precisa ir comer. Então, as duas filas precisam ser integradas. Sempre dá confusão. 
+Para minimizar o problema, o gerente do banco, muito sovina, ao invés de contratar mais um funcionário, 
+propôs a seguinte solução. As pessoas da fila do funcionário que foi almoçar devem ser intercaladas com as 
+pessoas da fila do funcionário que ficou trabalhando, a partir da segunda posição. E haja confusão!
+
+Entrada: 
+
+Consiste dos inteiros n, m e k (0<=n <=10000, 0<=m <=10000, 1<=k<=2) correspondendo, 
+respectivamente, a quantidade de pessoas que existem em cada fila e qual foi à fila que o funcionário 
+foi almoçar, sendo k=1 para a primeira fila e k=2 para a segunda fila. Seguidos de n inteiros representando
+as pessoas da primeira file e m inteiros representando as pessoas da segunda fila. Os inteiros nunca se repetem.
+
+Saída:
+
+Consiste em uma sequência de inteiros, um em cada linha representando as pessoas da nova fila.
+
+*/
+
+
 typedef struct Node{
 
     int pessoa;
