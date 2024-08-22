@@ -30,6 +30,17 @@ void inserir(Node **head, Node **tail, char nome[30]){
     
 }
 
+void liberar(Node **head){
+
+    while(*head!=NULL){
+
+        Node *temp = *head;
+        *head = (*head)->next;
+        free(temp);
+    }
+
+}
+
 int main(){
 
     Node *head = NULL;
