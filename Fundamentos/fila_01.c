@@ -23,7 +23,7 @@ void enqueue(Node **head, Node **tail, int data){
         (*tail)->next = newNode;
         *tail = newNode;
     }
-    
+
 }
 
 
@@ -61,7 +61,7 @@ int main(){
         scanf("%d", &n);
         enqueue(&head, &tail, n);
     }
-
+    imprimir(&head);
     liberar(&head);
 
     return 0;
