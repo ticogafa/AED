@@ -8,7 +8,7 @@ typedef struct Node{
 
 }Node;
 
-
+ 
 void enqueue(Node **head, Node **tail, int data){
 
     Node *newNode = (Node*)malloc(sizeof(Node));
