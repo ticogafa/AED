@@ -24,23 +24,6 @@ void enfileirar(Node **head, Node **tail, int n){
 
 }
 
-void concatenar(Node *head1, Node *head2, Node **headP) {
-    Node *current;
-    current = head1;
-
-    while (current != NULL) {
-        empilhar(headP, current->n);
-        current = current->next;
-    }
-
-    current = head2;
-
-    while (current != NULL) {
-        empilhar(headP, current->n);
-        current = current->next;
-    }
-}
-
 void empilhar(Node **headP, int n) {
     Node *novo = (Node*)malloc(sizeof(Node));
     if (novo != NULL) {
@@ -50,13 +33,32 @@ void empilhar(Node **headP, int n) {
     }
 }
 
+void concatenar(Node *head1, Node *head2, Node **headP) {
+    Node *current;
+    current = head2;
+
+    while (current != NULL) {
+        empilhar(headP, current->n);
+        current = current->next;
+    }
+
+    current = head1;
+
+    while (current != NULL) {
+        empilhar(headP, current->n);
+        current = current->next;
+    }
+}
+
+
+
 void imprimir(Node **head){
 
     Node *current = *head;
     while(current!=NULL){
 
         printf("%d\n", current->n);
-        current = (current)->next;
+        current = current->next;
 
     }
     printf("\n");
@@ -75,7 +77,9 @@ void liberar(Node **head){
 
 int main(){
 
-    Node *head1 = NULL, *tail1 = NULL, *head2 = NULL, *tail2 = NULL, *headP = NULL;
+    Node *head1 = NULL, *tail1 = NULL;
+    Node *head2 = NULL, *tail2 = NULL;
+    Node *headP = NULL;
 
     printf("Insira os números da Fila 1: \n");
 
