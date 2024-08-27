@@ -72,7 +72,7 @@ int main(){
     int escolha = 0;
 
     while(escolha!=-1){
-        printf("Digite uma opção:\n1 - Inserir nome\n2 - Imprimir base\n3 - Imprimir todos os nós pares\nDigite -1 para finalizar\n");
+        printf("Digite uma opção:\n1 - Inserir nome\n2 - Imprimir base\n3 - Imprimir todos os nós nas posições pares\nDigite -1 para finalizar\n");
         scanf("%d", &escolha);
  
         switch (escolha){
