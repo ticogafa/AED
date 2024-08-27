@@ -18,8 +18,6 @@ void inserir(Node **head, int data){
         *head = novo;
     }
 
-    
-
 }
 
 void remover(Node **head){
