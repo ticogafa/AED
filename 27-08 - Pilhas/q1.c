@@ -21,6 +21,25 @@ void inserir(Aluno **head, char nome[30]){
 
 }
 
+void imprimirPares(Aluno **head){
+
+    if(*head == NULL){
+        printf("A lista está vazia\n");
+        return;
+    }
+    Aluno *current = *head;
+    int cont = 1;
+
+    while(current!=NULL){
+        cont = cont +1;
+        if(cont % 2 == 0){
+            printf("%s", current->nome);
+        }
+        current = current->next;
+    }
+
+}
+
 void imprimirBase(Aluno **head){
 
     if(*head == NULL){
@@ -58,16 +77,18 @@ int main(){
  
         switch (escolha){
         case 1:
-        scanf("%s", nome);
-        inserir(&head, nome);
+            scanf("%s", nome);
+            inserir(&head, nome);
             break;
 
         case 2:
 
-        imprimirBase(&head);
+            imprimirBase(&head);
             break;
 
         case 3:
+
+            imprimirPares(&head);
             break;
         
         default:
