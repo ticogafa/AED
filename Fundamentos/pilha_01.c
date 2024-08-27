@@ -22,6 +22,17 @@ void inserir(Node **head, int data){
 
 }
 
+void remover(Node **head){
+
+    if(*head!=NULL){
+
+        Node *aux = *head;
+        *head = (*head)->next;
+        free(aux);
+
+    }
+
+}
 
 int main(){
 
