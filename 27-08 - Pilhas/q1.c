@@ -28,10 +28,38 @@ void imprimirPares(Aluno **head){
         return;
     }
     Aluno *current = *head;
-    int cont = 1;
+    int cont = 0;
+
+    while (current!=NULL){
+        cont++;
+        current = current->next;
+    }
+    
+    Aluno *atual = *head;
+
+    if (cont % 2 == 0){
+        while(atual!=NULL){
+
+        if(cont % 2 == 0){
+            printf("%s\n", atual->nome);
+        }
+        atual = atual->next;
+        cont++;
+    }
+    }else if (cont % 2 != 0){
+        while(atual!=NULL){
+
+        if(cont % 2 == 0){
+            printf("%s\n", atual->nome);
+        }
+        atual = atual->next;
+        cont++;
+    }
+    }
+    
 
     while(current!=NULL){
-        cont = cont +1;
+
         if(cont % 2 == 0){
             printf("%s", current->nome);
         }
