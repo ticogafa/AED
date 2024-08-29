@@ -66,7 +66,7 @@ void liberar(Node **head){
     }
 }
 
-void alternar(Node *head1, Node *head2, Node *tail1, Node *tail2, int ordem){
+void alternar(Node *head1, Node *head2, int ordem){
 
     switch(ordem){
 
@@ -160,7 +160,7 @@ int main(){
 
     }
 
-    alternar(head1, head2, tail1, tail2, k);
+    alternar(head1, head2, k);
 
     liberar(&head1);
     liberar(&head2);
