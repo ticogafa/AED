@@ -9,13 +9,22 @@ typedef struct Node {
 } Node;
 
 void inserirInicio(Node **head, int n);
+void liberar(Node **head);
+void imprimir(Node **head);
 
 
 int main(){
 
     Node *head = NULL;
+    int n;
 
-    
+    for(int i = 0; i <2; i++){
+        scanf("%d", &n);
+        inserirInicio(&head, n);
+    }
+
+    imprimir(&head);
+    liberar(&head);
 
     return 0;
 
@@ -37,4 +46,24 @@ void inserirInicio(Node **head, int n){
         *head = newNode;
     }
     
+}
+
+void liberar(Node **head){
+
+    while(*head!=NULL){
+
+        Node *temp = *head;
+        *head = (*head)->next;
+        free(temp);
+
+    }
+}
+
+void imprimir(Node **head) {
+    Node *current = *head;
+    while (current != NULL) {
+        printf("%d ", current->data); 
+        current = current->next; 
+    }
+    printf("\n"); 
 }
