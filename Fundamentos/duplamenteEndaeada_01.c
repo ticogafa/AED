@@ -12,6 +12,7 @@ void inserirInicio(Node **head, int n);
 void liberar(Node **head);
 void imprimir(Node **head);
 void imprimiInvertido(Node **head);
+void remover(Node **head);
 
 
 int main(){
@@ -19,11 +20,14 @@ int main(){
     Node *head = NULL;
     int n;
 
-    for(int i = 0; i <2; i++){
+    for(int i = 0; i <5; i++){
         scanf("%d", &n);
         inserirInicio(&head, n);
     }
 
+    imprimir(&head);
+    imprimiInvertido(&head);
+    remover(&head);
     imprimir(&head);
     imprimiInvertido(&head);
     liberar(&head);
@@ -82,4 +86,22 @@ void imprimiInvertido(Node **head) {
         current = current->prev; 
     }
     printf("\n"); 
+}
+
+void remover(Node **head){
+
+    if(*head!=NULL){
+
+        Node *aux = *head;
+
+        *head = (*head)->next;
+        free(aux);
+        if(*head!=NULL){
+            (*head)->prev = NULL;
+        }
+
+    }else{
+        printf("\nNão há nada para remover\n");
+    }
+
 }
