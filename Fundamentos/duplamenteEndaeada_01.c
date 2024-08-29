@@ -11,6 +11,7 @@ typedef struct Node {
 void inserirInicio(Node **head, int n);
 void liberar(Node **head);
 void imprimir(Node **head);
+void imprimiInvertido(Node **head);
 
 
 int main(){
@@ -24,6 +25,7 @@ int main(){
     }
 
     imprimir(&head);
+    imprimiInvertido(&head);
     liberar(&head);
 
     return 0;
@@ -64,6 +66,20 @@ void imprimir(Node **head) {
     while (current != NULL) {
         printf("%d ", current->data); 
         current = current->next; 
+    }
+    printf("\n"); 
+}
+
+void imprimiInvertido(Node **head) {
+    Node *current = *head;
+
+    while(current->next!=NULL){
+        current = current->next;
+    }
+
+    while (current != NULL) {
+        printf("%d ", current->data); 
+        current = current->prev; 
     }
     printf("\n"); 
 }
