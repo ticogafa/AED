@@ -8,7 +8,7 @@ typedef struct Node {
     struct Node *prev;
 } Node;
 
-void inserir(Node **head, int n);
+void inserirInicio(Node **head, int n);
 
 
 int main(){
@@ -21,7 +21,7 @@ int main(){
 
 }
 
-void inserir(Node **head, int n){
+void inserirInicio(Node **head, int n){
 
     Node *newNode = (Node*)malloc(sizeof(Node));
 
