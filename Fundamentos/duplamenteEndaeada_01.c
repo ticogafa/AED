@@ -37,5 +37,4 @@ void inserirInicio(Node **head, int n){
         *head = newNode;
     }
     
-
 }
