@@ -13,6 +13,7 @@ void liberar(Node **head);
 void imprimir(Node **head);
 void imprimiInvertido(Node **head);
 void remover(Node **head);
+void removerFinal(Node **head);
 
 
 int main(){
@@ -28,6 +29,7 @@ int main(){
     imprimir(&head);
     imprimiInvertido(&head);
     remover(&head);
+    removerFinal(&head);
     imprimir(&head);
     imprimiInvertido(&head);
     liberar(&head);
@@ -104,4 +106,24 @@ void remover(Node **head){
         printf("\nNão há nada para remover\n");
     }
 
+}
+
+void removerFinal(Node **head) {
+    if (*head != NULL) {
+        Node *aux = *head;
+
+        while (aux->next != NULL) {
+            aux = aux->next;
+        }
+
+        if (aux->prev == NULL) {
+            *head = NULL;
+        } else {
+            aux->prev->next = NULL;
+        }
+
+        free(aux);
+    } else {
+        printf("\nNão há nada para remover\n");
+    }
 }
