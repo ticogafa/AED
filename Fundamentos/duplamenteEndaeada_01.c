@@ -14,6 +14,7 @@ void imprimir(Node **head);
 void imprimiInvertido(Node **head);
 void remover(Node **head);
 void removerFinal(Node **head);
+void inserirFinal(Node **head, int n);
 
 
 int main(){
@@ -24,6 +25,9 @@ int main(){
     for(int i = 0; i <5; i++){
         scanf("%d", &n);
         inserirInicio(&head, n);
+
+        scanf("%d", &n);
+        inserirFinal(&head, n);
     }
 
     imprimir(&head);
@@ -125,5 +129,27 @@ void removerFinal(Node **head) {
         free(aux);
     } else {
         printf("\nNão há nada para remover\n");
+    }
+}
+
+void inserirFinal(Node **head, int n) {
+    Node *newNode = (Node*)malloc(sizeof(Node));
+    if (newNode) {
+        newNode->data = n;
+        newNode->next = NULL;
+
+        if (*head == NULL) {
+            newNode->prev = NULL;
+            *head = newNode;
+        } else {
+            Node *aux = *head;
+            while (aux->next != NULL) {
+                aux = aux->next;
+            }
+            aux->next = newNode;
+            newNode->prev = aux;
+        }
+    } else {
+        printf("Erro ao alocar memória\n");
     }
 }
