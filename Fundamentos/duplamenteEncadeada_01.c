@@ -18,6 +18,7 @@ void inserirFinalTail(Node **head, Node **tail, int n);
 void removerFinalTail(Node **head, Node **tail);
 void inserirOrdenado(Node **head, int n);
 Node* intercarlarListas(Node *head1, Node *head2);
+void buscarEContar(Node *head, int valor);
 
 int main(){
 
@@ -42,6 +43,33 @@ int main(){
 
     return 0;
 
+}
+
+void buscarEContar(Node *head, int valor) {
+    Node *aux = head;
+    int antes = 0, depois = 0;
+    int encontrado = 0;
+
+    while (aux != NULL) {
+        if (aux->data == valor) {
+            encontrado = 1;
+            Node *temp = aux->next;
+            while (temp != NULL) {
+                depois++;
+                temp = temp->next;
+            }
+            break;
+        }
+        antes++;
+        aux = aux->next;
+    }
+
+    if (encontrado) {
+        printf("Elementos antes de %d: %d\n", valor, antes);
+        printf("Elementos depois de %d: %d\n", valor, depois);
+    } else {
+        printf("Valor %d não encontrado na lista.\n", valor);
+    }
 }
 
 Node* intercalarListas(Node *head1, Node *head2) {
