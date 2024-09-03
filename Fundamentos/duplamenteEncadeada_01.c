@@ -17,8 +17,8 @@ void inserirFinal(Node **head, int n);
 void inserirFinalTail(Node **head, Node **tail, int n);
 void removerFinalTail(Node **head, Node **tail);
 void inserirOrdenado(Node **head, int n);
-Node* intercarlarListas(Node *head1, Node *head2);
 void buscarEContar(Node *head, int valor);
+Node* intercarlarListas(Node *head1, Node *head2);
 
 int main(){
 
