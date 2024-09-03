@@ -16,6 +16,7 @@ void removerFinal(Node **head);
 void inserirFinal(Node **head, int n);
 void inserirFinalTail(Node **head, Node **tail, int n);
 void removerFinalTail(Node **head, Node **tail);
+void inserirOrdenado(Node **head, int n);
 
 int main(){
 
@@ -58,6 +59,39 @@ void inserirInicio(Node **head, int n){
         *head = newNode;
     }
     
+}
+
+void inserirOrdenado(Node **head, int n) {
+    Node *newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = n;
+    newNode->next = NULL;
+    newNode->prev = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        Node *aux = *head;
+        Node *prev = NULL;
+
+        while (aux != NULL && aux->data < n) {
+            prev = aux;
+            aux = aux->next;
+        }
+
+        if (prev == NULL) {
+            newNode->next = *head;
+            (*head)->prev = newNode;
+            *head = newNode;
+        } else if (aux == NULL) {
+            prev->next = newNode;
+            newNode->prev = prev;
+        } else {
+            newNode->next = aux;
+            newNode->prev = prev;
+            prev->next = newNode;
+            aux->prev = newNode;
+        }
+    }
 }
 
 void liberar(Node **head){
