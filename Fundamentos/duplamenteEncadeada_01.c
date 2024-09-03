@@ -17,7 +17,6 @@ void inserirFinal(Node **head, int n);
 void inserirFinalTail(Node **head, Node **tail, int n);
 void removerFinalTail(Node **head, Node **tail);
 
-
 int main(){
 
     Node *head = NULL;
