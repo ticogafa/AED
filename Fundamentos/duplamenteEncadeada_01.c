@@ -17,6 +17,7 @@ void inserirFinal(Node **head, int n);
 void inserirFinalTail(Node **head, Node **tail, int n);
 void removerFinalTail(Node **head, Node **tail);
 void inserirOrdenado(Node **head, int n);
+Node* intercarlarListas(Node *head1, Node *head2);
 
 int main(){
 
@@ -41,6 +42,47 @@ int main(){
 
     return 0;
 
+}
+
+Node* intercalarListas(Node *head1, Node *head2) {
+    Node *headResult = NULL;
+    Node *tailResult = NULL;
+    Node *aux1 = head1;
+    Node *aux2 = head2;
+
+    while (aux1 != NULL || aux2 != NULL) {
+        if (aux1 != NULL) {
+            Node *newNode = (Node*)malloc(sizeof(Node));
+            newNode->data = aux1->data;
+            newNode->next = NULL;
+            newNode->prev = tailResult;
+
+            if (tailResult == NULL) {
+                headResult = newNode;
+            } else {
+                tailResult->next = newNode;
+            }
+            tailResult = newNode;
+            aux1 = aux1->next;
+        }
+
+        if (aux2 != NULL) {
+            Node *newNode = (Node*)malloc(sizeof(Node));
+            newNode->data = aux2->data;
+            newNode->next = NULL;
+            newNode->prev = tailResult;
+
+            if (tailResult == NULL) {
+                headResult = newNode;
+            } else {
+                tailResult->next = newNode;
+            }
+            tailResult = newNode;
+            aux2 = aux2->next;
+        }
+    }
+
+    return headResult;
 }
 
 void inserirInicio(Node **head, int n){
