@@ -5,7 +5,6 @@ typedef struct Node {
 
 	int data;
 	struct Node *next;
-	struct Node *prev;
 
 }Node;
 
@@ -44,7 +43,7 @@ void remover(Node **head){
 
 	}
 
-    
+
 }
 
 void imprimir(Node **head){
@@ -73,7 +72,7 @@ void inserir(Node **head, int n) {
     }
     newNode->data = n;
     newNode->next = NULL;
-    newNode->prev = NULL;
+    
 
     if (*head != NULL) {
         Node *aux = *head;
@@ -81,7 +80,7 @@ void inserir(Node **head, int n) {
             aux = aux->next;
         }
         aux->next = newNode;
-        newNode->prev = aux;
+        
     } else {
         *head = newNode;
     }
