@@ -12,7 +12,7 @@ struct Node *next;
 void imprimir(Node **head);
 void liberar(Node **head);
 void empilhar(Node **head, int n);
-
+void remover(Node **head);
 
 int main(){
 
@@ -28,9 +28,25 @@ int main(){
 	}
 	
 	imprimir(&head);
+    remover(&head);
+    printf("Removendo o primeiro elemento\n");
+    imprimir(&head);
 	liberar(&head);
 
 	return 0;
+
+}
+
+void remover(Node **head){
+
+	if(*head!=NULL){
+	Node *temp = *head;
+	*head = (*head)->next;
+	free(temp);
+	}else{
+		printf("Não há nada para remover\n");
+
+	}
 
 }
 

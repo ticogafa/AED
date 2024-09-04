@@ -26,7 +26,10 @@ int main(){
 		inserir(&head, n);
 
 	}
+	
+	imprimir(&head);
 	remover(&head);
+	printf("Removendo o primeiro elemento\n");
 	imprimir(&head);
 	liberar(&head);
 	return 0;
