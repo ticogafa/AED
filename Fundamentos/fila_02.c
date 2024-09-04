@@ -9,7 +9,7 @@ typedef struct Node {
 
 }Node;
 
-
+void imprimir(Node **head);
 void inserir(Node **head, int n);
 void liberar(Node **head);
 
@@ -17,33 +17,58 @@ int main(){
 
 
 	Node *head = NULL;
-	inserir(&head, 10);
+	int n;
 
+	for(int i = 0; i < 10; i++){
+
+		scanf("%d", &n);
+		inserir(&head, n);
+
+	}
+
+	imprimir(&head);
 	liberar(&head);
 	return 0;
 }
 
-void inserir(Node **head, int n){
-
-	Node *newNode = (Node*)malloc(sizeof(Node));
-	Node *aux = *head;
-	newNode->data = n;
+void imprimir(Node **head){
 
 	if(*head!=NULL){
 
-		while(aux->next!=NULL){
+		Node *aux = *head;
+		
+		while(aux!=NULL){
 
-			aux = aux->next;	
+			printf("%d -> ", aux->data);
+			aux = aux->next;
 		}
 
-		newNode = aux->next;
-		aux = newNode->prev;
-
-	}else{
-
-		*head = newNode;
+        printf("NULL\n");
+	
 	}
 
+}
+
+void inserir(Node **head, int n) {
+    Node *newNode = (Node*)malloc(sizeof(Node));
+    if (newNode == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
+    }
+    newNode->data = n;
+    newNode->next = NULL;
+    newNode->prev = NULL;
+
+    if (*head != NULL) {
+        Node *aux = *head;
+        while (aux->next != NULL) {
+            aux = aux->next;
+        }
+        aux->next = newNode;
+        newNode->prev = aux;
+    } else {
+        *head = newNode;
+    }
 }
 
 void liberar(Node **head){
@@ -55,5 +80,5 @@ void liberar(Node **head){
 		free(temp);
 	}
 
-	printf("Memória liberada com sucesso!");
+	printf("\nMemória liberada com sucesso!\n");
 }
