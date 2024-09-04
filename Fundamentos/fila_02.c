@@ -12,6 +12,8 @@ typedef struct Node {
 void imprimir(Node **head);
 void inserir(Node **head, int n);
 void liberar(Node **head);
+void remover(Node **head);
+
 
 int main(){
 
@@ -25,10 +27,24 @@ int main(){
 		inserir(&head, n);
 
 	}
-
+	remover(&head);
 	imprimir(&head);
 	liberar(&head);
 	return 0;
+}
+
+void remover(Node **head){
+
+	if(*head!=NULL){
+
+		Node *temp = *head;
+		*head = (*head)->next;
+		free(temp);
+
+
+	}
+
+    
 }
 
 void imprimir(Node **head){
