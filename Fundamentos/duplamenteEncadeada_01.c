@@ -10,7 +10,7 @@ typedef struct Node {
 void inserirInicio(Node **head, int n);
 void liberar(Node **head);
 void imprimir(Node **head);
-void imprimiInvertido(Node **head);
+void imprimirInvertido(Node **head);
 void remover(Node **head);
 void removerFinal(Node **head);
 void inserirFinal(Node **head, int n);
@@ -34,11 +34,11 @@ int main(){
     }
 
     imprimir(&head);
-    imprimiInvertido(&head);
+    imprimirInvertido(&head);
     remover(&head);
     removerFinal(&head);
     imprimir(&head);
-    imprimiInvertido(&head);
+    imprimirInvertido(&head);
     liberar(&head);
 
     return 0;
@@ -184,7 +184,7 @@ void imprimir(Node **head) {
     printf("\n"); 
 }
 
-void imprimiInvertido(Node **head) {
+void imprimirInvertido(Node **head) {
     Node *current = *head;
 
     while(current->next!=NULL){
