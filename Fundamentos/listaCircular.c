@@ -12,6 +12,8 @@ void inserir(Node **head, Node **tail, int n);
 void imprimir(Node **head, Node **tail);
 int tamanho(Node *head, Node *tail);
 void removerInicio(Node **head, Node **tail);
+void inserirFinal(Node **head, Node **tail, int n);
+void removerFinal(Node **head, Node **tail);
 
 int main(){
 
@@ -29,6 +31,12 @@ int main(){
 	imprimir(&head, &tail);
 	printf("\nTamanho da lista: %d\n", tamanho(head, tail));
 	removerInicio(&head, &tail);
+	imprimir(&head, &tail);
+	printf("\n");
+	inserirFinal(&head, &tail, 100);
+	imprimir(&head, &tail);
+	printf("\n");
+	removerFinal(&head, &tail);
 	imprimir(&head, &tail);
 	liberar(&head, &tail);
 	
@@ -50,6 +58,27 @@ void inserir(Node **head, Node **tail, int n){
 		newNode->next = *head;
 		*head = newNode; 
 		(*tail)->next = *head;
+	}
+
+}
+
+void inserirFinal(Node **head, Node **tail, int n){
+
+	Node *newNode = (Node*)malloc(sizeof(Node));
+	if(newNode!=NULL){
+		newNode->data = n;
+
+		if(*head==NULL){
+			*head = newNode;
+			*tail = newNode;
+			(*tail)->next = *head;
+		}else{
+			(*tail)->next = newNode;
+			*tail = newNode;
+			(*tail)->next = *head;
+
+		}
+		
 	}
 
 }
@@ -102,6 +131,25 @@ void removerInicio(Node **head, Node **tail){
 		*head = (*head)->next;
 		(*tail)->next = *head;
 	}
+		free(temp);
+		printf("\nElemento removido com sucesso!\n");
+	}
+}
+
+void removerFinal(Node **head, Node **tail){
+	if(*head!=NULL){
+		Node *aux = *head;
+		Node *temp = *tail;
+		if(*head==*tail){
+			*head = NULL;
+			*tail = NULL;
+		}else{
+			while(aux->next!=*tail){
+				aux = aux->next;
+			}
+			*tail = aux;
+			(*tail)->next = *head;
+		}
 		free(temp);
 		printf("\nElemento removido com sucesso!\n");
 	}
