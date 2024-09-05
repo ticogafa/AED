@@ -73,9 +73,9 @@ int tamanho(Node *head, Node *tail){
 			head = head->next;
 			cont++;
 		}while(head!=tail->next);
+	}
+	
 	return cont;
-
-}
 }
 
 void liberar(Node **head, Node **tail){
