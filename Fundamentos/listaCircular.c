@@ -11,6 +11,7 @@ void liberar(Node **head, Node **tail);
 void inserir(Node **head, Node **tail, int n);
 void imprimir(Node **head, Node **tail);
 int tamanho(Node *head, Node *tail);
+void removerInicio(Node **head, Node **tail);
 
 int main(){
 
@@ -25,6 +26,9 @@ int main(){
 		inserir(&head, &tail, n);
 	}
 
+	imprimir(&head, &tail);
+	printf("\nTamanho da lista: %d\n", tamanho(head, tail));
+	removerInicio(&head, &tail);
 	imprimir(&head, &tail);
 	liberar(&head, &tail);
 	
@@ -57,7 +61,7 @@ void imprimir(Node **head, Node **tail){
 
 		do{
 
-			printf("%d", aux->data);
+			printf("%d -> ", aux->data);
 			aux = aux->next;
 
 		}while(aux!=(*tail)->next);
@@ -69,7 +73,6 @@ int tamanho(Node *head, Node *tail){
 	
 	if(head!=NULL){
 		do{
-			printf("%d", head->data);
 			head = head->next;
 			cont++;
 		}while(head!=tail->next);
@@ -87,4 +90,19 @@ void liberar(Node **head, Node **tail){
 	}while(*head!=(*tail)->next);
 
 	printf("\nMemória liberada com sucesso!\n");
+}
+
+void removerInicio(Node **head, Node **tail){
+	if(*head!=NULL){
+		Node *temp = *head;
+		if(*head==*tail){
+			*head = NULL;
+			*tail = NULL;
+	}else{
+		*head = (*head)->next;
+		(*tail)->next = *head;
+	}
+		free(temp);
+		printf("\nElemento removido com sucesso!\n");
+	}
 }
