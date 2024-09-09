@@ -9,6 +9,7 @@ typedef struct Node {
 
 void inserir(Node **head, Node **tail, int n);
 void imprimir(Node **head, Node **tail);
+void liberar(Node **head, Node **tail);
 
 int main(){
 
