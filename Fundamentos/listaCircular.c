@@ -127,10 +127,10 @@ void removerInicio(Node **head, Node **tail){
 		if(*head==*tail){
 			*head = NULL;
 			*tail = NULL;
-	}else{
+		}else{
 		*head = (*head)->next;
 		(*tail)->next = *head;
-	}
+		}
 		free(temp);
 		printf("\nElemento removido com sucesso!\n");
 	}
