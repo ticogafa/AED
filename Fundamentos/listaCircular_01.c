@@ -17,7 +17,6 @@ int main(){
 	Node *tail = NULL;
 	int n;
 
-
 	for(int i = 0; i < 10; i ++){
 
 		scanf("%d", &n);
@@ -31,7 +30,6 @@ int main(){
 }
 
 void inserir(Node **head, Node **tail, int n){
-
 
 	Node *newNode = (Node*)malloc(sizeof(Node));
 
@@ -80,4 +78,5 @@ void liberar(Node **head, Node **tail){
 
 	*head = NULL;
 	*tail = NULL;
+	
 }
