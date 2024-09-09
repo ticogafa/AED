@@ -7,6 +7,8 @@ typedef struct Node {
 	struct Node *next;
 }Node;
 
+void inserir(Node **head, Node **tail, int n);
+void imprimir(Node **head, Node **tail);
 
 int main(){
 
@@ -22,7 +24,7 @@ int main(){
 	}
 	
 	imprimir(&head, &tail);
-	liberar(&head, &tail);
+	//liberar(&head, &tail);
 	return 0;
 
 }
@@ -36,14 +38,28 @@ void inserir(Node **head, Node **tail, int n){
 		
 		newNode->data = n;
 		
-		if(*head = NULL){
+		if(*head == NULL){
 			*head = newNode;
 			*tail = newNode;
 			(*tail)->next = *head;
 
 		}else{
-			
+			(*tail)->next = newNode;
+            *tail = newNode;
+            (*tail)->next = *head;
 		}
 
 	}
+}
+
+void imprimir(Node **head, Node **tail){
+
+	if(*head == NULL) return;
+
+	Node *aux = *head;
+	do{
+		printf("%d -> ", aux->data);
+		aux = aux->next;
+	}while(aux!=(*tail)->next);
+
 }
