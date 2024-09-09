@@ -10,6 +10,7 @@ typedef struct Node {
 void inserir(Node **head, Node **tail, int n);
 void imprimir(Node **head, Node **tail);
 void liberar(Node **head, Node **tail);
+void removerInicio(Node **head, Node **tail);
 
 int main(){
 
@@ -24,8 +25,30 @@ int main(){
 	}
 	
 	imprimir(&head, &tail);
+	removerInicio(&head, &tail);
+	imprimir(&head, &tail);
 	liberar(&head, &tail);
 	return 0;
+
+}
+
+void removerInicio(Node **head, Node **tail){
+
+	if(*head!=NULL){
+		
+		Node *temp = *head;
+		if(*head==*tail){
+
+			*head = NULL;
+			*tail = NULL;
+		}else{
+			*head = (*head)->next;
+			(*tail)->next = *head;
+		}
+		free(temp);
+		printf("Primeiro elemento removido com sucesso!");
+	
+	}
 
 }
 
@@ -53,14 +76,15 @@ void inserir(Node **head, Node **tail, int n){
 
 void imprimir(Node **head, Node **tail){
 
-	if(*head == NULL) return;
+	if(*head == NULL) return;	
+	printf("\n");
 
 	Node *aux = *head;
 	do{
 		printf("%d -> ", aux->data);
 		aux = aux->next;
 	}while(aux!=(*tail)->next);
-
+	printf("\n");
 }
 
 void liberar(Node **head, Node **tail){
@@ -78,5 +102,5 @@ void liberar(Node **head, Node **tail){
 
 	*head = NULL;
 	*tail = NULL;
-	
+
 }
