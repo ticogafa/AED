@@ -24,7 +24,7 @@ int main(){
 	}
 	
 	imprimir(&head, &tail);
-	//liberar(&head, &tail);
+	liberar(&head, &tail);
 	return 0;
 
 }
@@ -62,4 +62,21 @@ void imprimir(Node **head, Node **tail){
 		aux = aux->next;
 	}while(aux!=(*tail)->next);
 
+}
+
+void liberar(Node **head, Node **tail){
+	
+	if(*head == NULL) return;
+
+	Node *aux = *head;
+	Node *aux2 = NULL;
+
+	do{
+		aux2 = aux->next;
+		free(aux);
+		aux = aux2;
+	}while(aux!=(*tail)->next);
+
+	*head = NULL;
+	*tail = NULL;
 }
