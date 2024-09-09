@@ -11,6 +11,7 @@ void inserir(Node **head, Node **tail, int n);
 void imprimir(Node **head, Node **tail);
 void liberar(Node **head, Node **tail);
 void removerInicio(Node **head, Node **tail);
+int tamanhoDaLista(Node **head, Node **tail);
 
 int main(){
 
@@ -25,11 +26,25 @@ int main(){
 	}
 	
 	imprimir(&head, &tail);
+	printf("\nTamanho da lista circular: %d\n", tamanhoDaLista(&head, &tail));
 	removerInicio(&head, &tail);
 	imprimir(&head, &tail);
+	printf("\nTamanho da lista circular: %d\n", tamanhoDaLista(&head, &tail)); 
 	liberar(&head, &tail);
 	return 0;
 
+}
+
+int tamanhoDaLista(Node **head, Node **tail){
+	int cont = 0;
+	if(*head!=NULL){
+		Node *temp = *head;
+		do{
+			cont++;
+			temp = temp->next;
+		}while(temp!=(*tail)->next);
+	}
+return cont;
 }
 
 void removerInicio(Node **head, Node **tail){
