@@ -53,11 +53,12 @@ void inserir(Node **head, Node **tail, int n){
 		*head = newNode;
 		*tail = newNode;
 		(*tail)->next = *head;
+		}else{
+			(*tail)->next = newNode;
+			*tail = newNode;
+			(*tail)->next = *head;
 		}
-
-		newNode->next = *head;
-		*head = newNode; 
-		(*tail)->next = *head;
+		
 	}
 
 }

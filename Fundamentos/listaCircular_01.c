@@ -13,6 +13,7 @@ void liberar(Node **head, Node **tail);
 void removerInicio(Node **head, Node **tail);
 int tamanhoDaLista(Node **head, Node **tail);
 void removerFinal(Node **head, Node **tail);
+void inserirFinal(Node **head, Node **tail, int n);
 
 int main(){
 
@@ -34,8 +35,34 @@ int main(){
 	removerFinal(&head, &tail);
 	imprimir(&head, &tail);
 	printf("\nTamanho da lista circular: %d\n", tamanhoDaLista(&head, &tail));
+	printf("\nDigite um número para adicionar ao final da lista: \n");
+	scanf("%d", &n);
+	inserirFinal(&head, &tail, n);
+	imprimir(&head,&tail);
+	printf("\nTamanho da lista circular: %d\n", tamanhoDaLista(&head, &tail));
 	liberar(&head, &tail);
 	return 0;
+
+}
+
+void inserirFinal(Node **head, Node **tail, int n){
+
+	Node *newNode = (Node*)malloc(sizeof(Node));
+
+	if(newNode!= NULL){
+		newNode->data = n;
+
+		if(*head == NULL){
+			*head = newNode;
+			*tail = newNode;
+			(*tail)->next = *head;
+		}else{
+			(*tail)->next = newNode;
+			*tail = newNode;
+			(*tail)->next = *head;
+		}
+
+	}
 
 }
 
