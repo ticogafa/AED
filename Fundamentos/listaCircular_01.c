@@ -12,6 +12,7 @@ void imprimir(Node **head, Node **tail);
 void liberar(Node **head, Node **tail);
 void removerInicio(Node **head, Node **tail);
 int tamanhoDaLista(Node **head, Node **tail);
+void removerFinal(Node **head, Node **tail);
 
 int main(){
 
@@ -30,8 +31,37 @@ int main(){
 	removerInicio(&head, &tail);
 	imprimir(&head, &tail);
 	printf("\nTamanho da lista circular: %d\n", tamanhoDaLista(&head, &tail)); 
+	removerFinal(&head, &tail);
+	imprimir(&head, &tail);
+	printf("\nTamanho da lista circular: %d\n", tamanhoDaLista(&head, &tail));
 	liberar(&head, &tail);
 	return 0;
+
+}
+
+void removerFinal(Node **head, Node **tail){
+	
+	if(*head!=NULL){
+
+			Node *temp = *tail;
+			Node *aux = *head;
+		if(*head==*tail){
+
+			*head = NULL;
+			*tail = NULL;
+		}else{
+
+			while(aux->next!=*tail){
+				aux = aux->next;
+			}
+			*tail = aux;
+			(*tail)->next = *head;
+
+		}
+			
+		free(temp);
+		printf("\nÚltimo elemento deletado com sucesso!\n");
+	}
 
 }
 
