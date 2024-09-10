@@ -201,4 +201,3 @@ void liberar(Node **head, Node **tail){
     *tail = NULL;
     printf("Lista liberada com sucesso!\n");
 }
-
