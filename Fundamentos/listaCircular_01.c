@@ -7,7 +7,7 @@ typedef struct Node {
 	struct Node *next;
 }Node;
 
-void inserir(Node **head, Node **tail, int n);
+void inserirInicio(Node **head, Node **tail, int n);
 void imprimir(Node **head, Node **tail);
 void liberar(Node **head, Node **tail);
 void removerInicio(Node **head, Node **tail);
@@ -24,7 +24,7 @@ int main(){
 	for(int i = 0; i < 10; i ++){
 
 		scanf("%d", &n);
-		inserir(&head, &tail, n);
+		inserirInicio(&head, &tail, n);
 	}
 	
 	imprimir(&head, &tail);
@@ -124,25 +124,22 @@ void removerInicio(Node **head, Node **tail){
 
 }
 
-void inserir(Node **head, Node **tail, int n){
+void inserirInicio(Node **head, Node **tail, int n){
 
 	Node *newNode = (Node*)malloc(sizeof(Node));
 
 	if(newNode!=NULL){
-		
 		newNode->data = n;
-		
+
 		if(*head == NULL){
 			*head = newNode;
 			*tail = newNode;
 			(*tail)->next = *head;
-
 		}else{
-			(*tail)->next = newNode;
-            *tail = newNode;
-            (*tail)->next = *head;
+			newNode->next = *head;
+			*head = newNode;
+			(*tail)->next = *head;
 		}
-
 	}
 }
 
