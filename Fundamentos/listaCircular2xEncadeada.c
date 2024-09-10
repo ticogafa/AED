@@ -92,28 +92,28 @@ void inserirFinal(Node **head, Node **tail, int n){
 
 void removerFinal(Node **head, Node **tail){
     
-    if(*head!=NULL){
+    if(*head==NULL) return;
 
-            Node *temp = *tail;
-            Node *aux = *head;
-        if(*head==*tail){
+    Node *temp = *tail;
+    Node *aux = *head;
+    if(*head==*tail){
 
-            *head = NULL;
-            *tail = NULL;
-        }else{
+        *head = NULL;
+        *tail = NULL;
+    }else{
 
-            while(aux->next!=*tail){
-                aux = aux->next;
-            }
-            *tail = aux;
-            (*tail)->next = *head;
-            (*head)->prev = *tail;
-
+        while(aux->next!=*tail){
+            aux = aux->next;
         }
+        *tail = aux;
+        (*tail)->next = *head;
+        (*head)->prev = *tail;
+
+    }
             
         free(temp);
         printf("\nÚltimo elemento deletado com sucesso!\n");
-    }
+    
 
 }
 
