@@ -24,23 +24,23 @@ int main(){
 	for(int i = 0; i < 10; i ++){
 
 		scanf("%d", &n);
-		inserirInicio(&head, &tail, n);
+		inserirInicio(&head, &tail, n);//adiciona 10 números no inicio da lista circular
 	}
 	
-	imprimir(&head, &tail);
-	printf("\nTamanho da lista circular: %d\n", tamanhoDaLista(&head, &tail));
-	removerInicio(&head, &tail);
-	imprimir(&head, &tail);
-	printf("\nTamanho da lista circular: %d\n", tamanhoDaLista(&head, &tail)); 
-	removerFinal(&head, &tail);
-	imprimir(&head, &tail);
-	printf("\nTamanho da lista circular: %d\n", tamanhoDaLista(&head, &tail));
-	printf("\nDigite um número para adicionar ao final da lista: \n");
-	scanf("%d", &n);
-	inserirFinal(&head, &tail, n);
-	imprimir(&head,&tail);
-	printf("\nTamanho da lista circular: %d\n", tamanhoDaLista(&head, &tail));
-	liberar(&head, &tail);
+	imprimir(&head, &tail);//imprime a lista após a inserção dos 10 números
+	printf("\nTamanho da lista circular: %d\n", tamanhoDaLista(&head, &tail));//imprime o tamanho da lista circular
+	removerInicio(&head, &tail);//remove o primeiro elemento da lista
+	imprimir(&head, &tail);//imprime a lista após a remoção do primeiro elemento
+	printf("\nTamanho da lista circular: %d\n", tamanhoDaLista(&head, &tail)); //imprime o tamanho da lista circular
+	removerFinal(&head, &tail);//remove o último elemento da lista
+	imprimir(&head, &tail);//imprime a lista após a remoção do último elemento
+	printf("\nTamanho da lista circular: %d\n", tamanhoDaLista(&head, &tail));//imprime o tamanho da lista circular
+	printf("\nDigite um número para adicionar ao final da lista: \n");//adiciona um número ao final da lista
+	scanf("%d", &n);//lê o número digitado
+	inserirFinal(&head, &tail, n);//adiciona o número digitado ao final da lista
+	imprimir(&head,&tail);//imprime a lista após a inserção do número digitado
+	printf("\nTamanho da lista circular: %d\n", tamanhoDaLista(&head, &tail));//imprime o tamanho da lista circular
+	liberar(&head, &tail);//libera a lista
 	return 0;
 
 }
