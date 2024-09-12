@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void insertionSort(int arr[], int n) {
+void insertionSort(int arr[], int LEN) {
     int i, aux, j;
-    for (i = 1; i < n; i++) {
+    for (i = 1; i < LEN; i++) {
         aux = arr[i];
         j = i - 1;
 
@@ -15,19 +15,19 @@ void insertionSort(int arr[], int n) {
     }
 }
 
-void printArray(int arr[], int n) {
+void printArray(int arr[], int LEN) {
     int i;
-    for (i = 0; i < n; i++)
+    for (i = 0; i < LEN; i++)
         printf("%d ", arr[i]);
     printf("\n");
 }
 
 int main() {
     int arr[] = {10,9,8,7,6,5,4,3,2,1};
-    int n = sizeof(arr) / sizeof(arr[0]);
+    int LEN = sizeof(arr) / sizeof(arr[0]);
 
-    insertionSort(arr, n);
-    printArray(arr, n);
+    insertionSort(arr, LEN);
+    printArray(arr, LEN);
 
     return 0;
 }
