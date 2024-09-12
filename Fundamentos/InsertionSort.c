@@ -23,7 +23,7 @@ void printArray(int arr[], int n) {
 }
 
 int main() {
-    int arr[] = {99,5,6,44,34,5,6,77,54,3,4545,76,65443,543,345,4,354};
+    int arr[] = {10,9,8,7,6,5,4,3,2,1};
     int n = sizeof(arr) / sizeof(arr[0]);
 
     insertionSort(arr, n);
