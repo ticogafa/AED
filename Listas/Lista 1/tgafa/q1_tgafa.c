@@ -3,59 +3,61 @@
 #include <stdlib.h>
 
 typedef struct Node {
-    char items[1000];
-    int top;
+    char data;
+    struct Node* next;
 } Node;
 
-void iniciarPilha(Node *head) {
-    head->top = -1;
-}
-
-int ehVazio(Node *head) {
-    return head->top == -1;
-}
-
-void push(Node *head, char c) {
-    if (head->top < 1000 - 1) {
-        head->items[++(head->top)] = c;
+void empilhar(Node** head, char c) {
+    Node* novo = (Node*)malloc(sizeof(Node));
+    if (novo == NULL) {
+        printf("Erro: Falha na alocação de memória\n");
+        return;
     }
+    novo->data = c;
+    novo->next = *head;
+    *head = novo;
 }
 
-char pop(Node *head) {
-    if (!ehVazio(head)) {
-        return head->items[(head->top)--];
+char remover(Node** head) {
+    if (*head != NULL) {
+        Node* temp = *head;
+        char c = temp->data;
+        *head = temp->next;
+        free(temp);
+        return c;
     }
     return '\0';
 }
 
-int contarDiamantes(char *linha) {
-    Node head;
-    iniciarPilha(&head);
+int contarDiamantes(char *linha, Node **head) {
     int diamantes = 0;
 
     for (int i = 0; linha[i] != '\0'; i++) {
         if (linha[i] == '<') {
-            push(&head, '<');
-        } else if (linha[i] == '>' && !ehVazio(&head)) {
-            pop(&head);
+            empilhar(head, '<');
+        } else if (linha[i] == '>' && *head != NULL) {
+            remover(head);
             diamantes++;
         }
+    }
+    while (*head != NULL) {
+        remover(head);
     }
 
     return diamantes;
 }
 
 int main() {
-    int N;
-    char linha[1000 + 1];
+    int n;
+    char linha[1001];
+    Node *head = NULL;
 
-    scanf("%d", &N);
+    scanf("%d", &n);
     getchar();
     
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < n; i++) {
         fgets(linha, sizeof(linha), stdin);
-        linha[strcspn(linha, "\n")] = 0;
-        printf("%d\n", contarDiamantes(linha));
+        printf("%d\n", contarDiamantes(linha, &head));
     }
 
     return 0;
