@@ -92,13 +92,12 @@ Node *ordenarFilas(Node *oeste, Node *norte, Node *sul, Node *leste) {
     Node *head = NULL;
     Node **tail = &head;
 
-    while (oeste != NULL) {
-        *tail = oeste;
-        tail = &oeste->next;
-        oeste = oeste->next;
-    }
-
-    while (norte != NULL || sul != NULL || leste != NULL) {
+    while (oeste != NULL || norte != NULL || sul != NULL || leste != NULL) {
+        if (oeste != NULL) {
+            *tail = oeste;
+            tail = &oeste->next;
+            oeste = oeste->next;
+        }
         if (norte != NULL) {
             *tail = norte;
             tail = &norte->next;
