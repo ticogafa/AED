@@ -98,15 +98,15 @@ Node *ordenarFilas(Node *oeste, Node *norte, Node *sul, Node *leste) {
             tail = &oeste->next;
             oeste = oeste->next;
         }
-        if (norte != NULL) {
-            *tail = norte;
-            tail = &norte->next;
-            norte = norte->next;
-        }
         if (sul != NULL) {
             *tail = sul;
             tail = &sul->next;
             sul = sul->next;
+        }
+        if (norte != NULL) {
+            *tail = norte;
+            tail = &norte->next;
+            norte = norte->next;
         }
         if (leste != NULL) {
             *tail = leste;
