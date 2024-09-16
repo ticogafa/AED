@@ -8,10 +8,10 @@ typedef struct Node {
     struct Node* next;
 } Node;
 
-Node* enqueue(Node* head, int pontoCardeal, const char* id);
-void printQueue(Node* head);
-void freeQueue(Node* head);
-Node* mergeQueues(Node* oeste, Node* norte, Node* sul, Node* leste);
+Node* enfileirar(Node* head, int pontoCardeal, const char* id);
+void imprimir(Node* head);
+void liberar(Node* head);
+Node* ordenarFilas(Node* oeste, Node* norte, Node* sul, Node* leste);
 
 int main() {
     Node* oeste = NULL;
@@ -27,23 +27,23 @@ int main() {
 
         scanf("%s", id);
         if (pontoCardeal == -1) {
-            oeste = enqueue(oeste, pontoCardeal, id);
+            oeste = enfileirar(oeste, pontoCardeal, id);
         } else if (pontoCardeal == -2) {
-            norte = enqueue(norte, pontoCardeal, id);
+            norte = enfileirar(norte, pontoCardeal, id);
         } else if (pontoCardeal == -3) {
-            sul = enqueue(sul, pontoCardeal, id);
+            sul = enfileirar(sul, pontoCardeal, id);
         } else if (pontoCardeal == -4) {
-            leste = enqueue(leste, pontoCardeal, id);
+            leste = enfileirar(leste, pontoCardeal, id);
         }
     }
 
-    Node* head = mergeQueues(oeste, norte, sul, leste);
-    printQueue(head);
-    freeQueue(head);
+    Node* head = ordenarFilas(oeste, norte, sul, leste);
+    imprimir(head);
+    liberar(head);
     return 0;
 }
 
-Node* enqueue(Node* head, int pontoCardeal, const char* id) {
+Node* enfileirar(Node* head, int pontoCardeal, const char* id) {
     Node* newNode = (Node*)malloc(sizeof(Node));
     if (newNode == NULL) {
         printf("Erro: Falha na alocação de memória\n");
@@ -65,7 +65,7 @@ Node* enqueue(Node* head, int pontoCardeal, const char* id) {
     return head;
 }
 
-void printQueue(Node* head) {
+void imprimir(Node* head) {
     Node* temp = head;
     while (temp != NULL) {
         printf("%s", temp->id);
@@ -77,7 +77,7 @@ void printQueue(Node* head) {
     printf("\n");
 }
 
-void freeQueue(Node* head) {
+void liberar(Node* head) {
     Node* temp;
     while (head != NULL) {
         temp = head;
@@ -86,18 +86,16 @@ void freeQueue(Node* head) {
     }
 }
 
-Node* mergeQueues(Node* oeste, Node* norte, Node* sul, Node* leste) {
+Node* ordenarFilas(Node* oeste, Node* norte, Node* sul, Node* leste) {
     Node* head = NULL;
     Node** tail = &head;
 
-    // Adiciona todos os aviões do Oeste primeiro
     while (oeste != NULL) {
         *tail = oeste;
         tail = &oeste->next;
         oeste = oeste->next;
     }
 
-    // Alterna entre Norte e Sul, e depois adiciona Leste
     while (norte != NULL || sul != NULL || leste != NULL) {
         if (norte != NULL) {
             *tail = norte;
