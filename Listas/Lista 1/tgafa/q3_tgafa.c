@@ -5,19 +5,19 @@
 typedef struct Node {
     int pontoCardeal;
     char id[5];
-    struct Node* next;
+    struct Node *next;
 } Node;
 
-Node* enfileirar(Node* head, int pontoCardeal, const char* id);
-void imprimir(Node* head);
-void liberar(Node* head);
-Node* ordenarFilas(Node* oeste, Node* norte, Node* sul, Node* leste);
+Node *enfileirar(Node *head, int pontoCardeal, const char*id);
+void imprimir(Node *head);
+void liberar(Node *head);
+Node *ordenarFilas(Node *oeste, Node *norte, Node *sul, Node *leste);
 
 int main() {
-    Node* oeste = NULL;
-    Node* norte = NULL;
-    Node* sul = NULL;
-    Node* leste = NULL;
+    Node *oeste = NULL;
+    Node *norte = NULL;
+    Node *sul = NULL;
+    Node *leste = NULL;
     int pontoCardeal;
     char id[5];
 
@@ -37,14 +37,16 @@ int main() {
         }
     }
 
-    Node* head = ordenarFilas(oeste, norte, sul, leste);
+    Node *head = ordenarFilas(oeste, norte, sul, leste);
+
     imprimir(head);
     liberar(head);
+
     return 0;
 }
 
-Node* enfileirar(Node* head, int pontoCardeal, const char* id) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
+Node *enfileirar(Node *head, int pontoCardeal, const char*id) {
+    Node *newNode = (Node *)malloc(sizeof(Node));
     if (newNode == NULL) {
         printf("Erro: Falha na alocação de memória\n");
         return head;
@@ -57,7 +59,7 @@ Node* enfileirar(Node* head, int pontoCardeal, const char* id) {
         return newNode;
     }
 
-    Node* temp = head;
+    Node *temp = head;
     while (temp->next != NULL) {
         temp = temp->next;
     }
@@ -65,8 +67,8 @@ Node* enfileirar(Node* head, int pontoCardeal, const char* id) {
     return head;
 }
 
-void imprimir(Node* head) {
-    Node* temp = head;
+void imprimir(Node *head) {
+    Node *temp = head;
     while (temp != NULL) {
         printf("%s", temp->id);
         if (temp->next != NULL) {
@@ -77,8 +79,8 @@ void imprimir(Node* head) {
     printf("\n");
 }
 
-void liberar(Node* head) {
-    Node* temp;
+void liberar(Node *head) {
+    Node *temp;
     while (head != NULL) {
         temp = head;
         head = head->next;
@@ -86,9 +88,9 @@ void liberar(Node* head) {
     }
 }
 
-Node* ordenarFilas(Node* oeste, Node* norte, Node* sul, Node* leste) {
-    Node* head = NULL;
-    Node** tail = &head;
+Node *ordenarFilas(Node *oeste, Node *norte, Node *sul, Node *leste) {
+    Node *head = NULL;
+    Node **tail = &head;
 
     while (oeste != NULL) {
         *tail = oeste;
