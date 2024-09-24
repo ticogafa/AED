@@ -88,4 +88,3 @@ void quickSort(int *vetor, int inicio, int fim) {
         quickSort(vetor, i, fim);
     }
 }
-
