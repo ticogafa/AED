@@ -46,5 +46,10 @@ int main() {
     for(i = 0; i < n; i++) {
         printf("%d ", vetor[i]);
     }
+
+    printf("\n");
+
+    printf("Tempo de execucao: %f segundos\n", (double)clock() / CLOCKS_PER_SEC);
+
     return 0;
 }
