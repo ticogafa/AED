@@ -60,31 +60,3 @@ void troca(int v[], int i, int j){
     v[i] = v[j];
     v[j] = aux;
 }
-
-void quickSort(int *vetor, int inicio, int fim) {
-    int i, j, pivo, aux;
-    i = inicio;
-    j = fim;
-    pivo = vetor[(inicio + fim) / 2];
-    while(i <= j) {
-        while(vetor[i] < pivo) {
-            i++;
-        }
-        while(vetor[j] > pivo) {
-            j--;
-        }
-        if(i <= j) {
-            aux = vetor[i];
-            vetor[i] = vetor[j];
-            vetor[j] = aux;
-            i++;
-            j--;
-        }
-    }
-    if(j > inicio) {
-        quickSort(vetor, inicio, j);
-    }
-    if(i < fim) {
-        quickSort(vetor, i, fim);
-    }
-}
