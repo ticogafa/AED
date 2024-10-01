@@ -18,15 +18,15 @@ typedef struct Node{
 
 void sequencia(Node *head, Node *tail){
 
-    if(head==NULL) return;
+    if(head==NULL || tail==NULL) return;
 
     Node *aux = head;
     int cont = 0;
 
-    while(aux!= tail){
+    do {
         cont++;
         aux = aux->next;
-    }
+    } while (aux != head);
 
     if(cont<3){
         printf("Tamanho da lista é insuficiente :(");
@@ -35,11 +35,13 @@ void sequencia(Node *head, Node *tail){
 
     aux = head;
 
-    while(aux!= tail){
-        if(aux->prev->data%2!= 0 && aux->prev->prev->data%2!= 0){
+    do {
+        if (aux->prev->data % 2 != 0 && aux->prev->prev->data % 2 != 0) {
+            printf("%d ", aux->data);
+        } else if (aux->next->data % 2 != 0 && aux->next->next->data % 2 != 0) {
             printf("%d ", aux->data);
         }
         aux = aux->next;
-    }
+    } while (aux != head);
 
 }
