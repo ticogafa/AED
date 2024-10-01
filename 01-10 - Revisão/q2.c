@@ -18,6 +18,28 @@ typedef struct Node{
 
 void sequencia(Node *head, Node *tail){
 
-    
+    if(head==NULL) return;
+
+    Node *aux = head;
+    int cont = 0;
+
+    while(aux!= tail){
+        cont++;
+        aux = aux->next;
+    }
+
+    if(cont<3){
+        printf("Tamanho da lista é insuficiente :(");
+        return;
+    }
+
+    aux = head;
+
+    while(aux!= tail){
+        if(aux->prev->data%2!= 0 && aux->prev->prev->data%2!= 0){
+            printf("%d ", aux->data);
+        }
+        aux = aux->next;
+    }
 
 }
