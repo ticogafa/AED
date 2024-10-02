@@ -69,21 +69,20 @@ void inserirFinal(Node **head, Node **tail, int n){
 void removerFinal(Node **head, Node **tail){
 	
 	if(*head!=NULL){
-
 			Node *temp = *tail;
 			Node *aux = *head;
-		if(*head==*tail){
 
+		if(*head==*tail){
 			*head = NULL;
 			*tail = NULL;
-		}else{
 
+		}else{
 			while(aux->next!=*tail){
 				aux = aux->next;
 			}
 			*tail = aux;
 			(*tail)->next = *head;
-
+			
 		}
 			
 		free(temp);
