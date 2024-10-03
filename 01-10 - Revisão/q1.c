@@ -24,7 +24,7 @@ void multiplicacao(Node *head, Node *tail){
     int cont = 0;
 
     do{
-        cont++;
+        cont++; 
         aux = aux->next;
         
     }while(aux!=head);
