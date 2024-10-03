@@ -13,6 +13,7 @@ void imprimir(Node **head);
 void imprimirInvertido(Node **head);
 void remover(Node **head);
 void removerFinal(Node **head);
+void removerEscolha(Node **head, int n);
 void inserirFinal(Node **head, int n);
 void inserirFinalTail(Node **head, Node **tail, int n);
 void removerFinalTail(Node **head, Node **tail);
@@ -292,5 +293,37 @@ void removerFinalTail(Node **head, Node **tail) {
         free(aux);
     } else {
         printf("\nNão há nada para remover\n");
+    }
+}
+
+void removerEscolha(Node **head, int n){
+
+    if(*head!=NULL){
+
+        Node *aux = *head;
+
+        while(aux!=NULL && aux->data!=n){
+            aux = aux->next;
+        }
+
+        if(aux!=NULL){
+            if(aux->prev==NULL){
+                *head = aux->next;
+            }else{
+                aux->prev->next = aux->next;
+            }
+
+            if(aux->next!=NULL){
+                aux->next->prev = aux->prev;
+            }
+
+            free(aux);
+
+        }else{
+            printf("\nElemento não encontrado\n");
+        }
+
+    }else{
+        printf("\nLista vazia\n");
     }
 }
