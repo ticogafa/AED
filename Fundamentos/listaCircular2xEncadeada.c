@@ -12,6 +12,7 @@ void inserirInicio(Node **head, Node **tail, int n);
 void inserirFinal(Node **head, Node **tail, int n);
 void removerInicio(Node **head, Node **tail);
 void removerFinal(Node **head, Node **tail);
+void removerEscolha(Node **head, Node **tail, int n);
 void imprimir(Node **head, Node **tail);
 void liberar(Node **head, Node **tail);
 int tamanhoDaLista(Node **head, Node **tail);
@@ -200,4 +201,34 @@ void liberar(Node **head, Node **tail){
     *head = NULL;
     *tail = NULL;
     printf("Lista liberada com sucesso!\n");
+}
+
+void removerEscolha(Node **head, Node **tail, int n){
+
+    if(*head!=NULL){
+        Node *aux = *head;
+        do{
+            if(aux->data == n){
+                if(aux==*head){
+                    *head = aux->next;
+                    (*head)->prev = *tail;
+                    (*tail)->next = *head;
+                }else if(aux==*tail){
+                    *tail = aux->prev;
+                    (*tail)->next = *head;
+                    (*head)->prev = *tail;
+                }else{
+                    aux->prev->next = aux->next;
+                    aux->next->prev = aux->prev;
+                }
+                free(aux);
+                printf("\nElemento removido com sucesso!\n");
+                return;
+            }
+            aux = aux->next;
+        }while(aux!=(*tail)->next);
+    }else{
+        printf("\nLista vazia!\n");
+    }
+
 }
