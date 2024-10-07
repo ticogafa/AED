@@ -26,6 +26,7 @@ int main() {
     int arr[] = {10,9,8,7,6,5,4,3,2,1};
     int LEN = sizeof(arr) / sizeof(arr[0]);
 
+    printArray(arr, LEN);
     insertionSort(arr, LEN);
     printArray(arr, LEN);
 
