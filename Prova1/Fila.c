@@ -19,14 +19,23 @@ typedef struct Node{
 void inserir(Node **head, Node **tail, int n);
 void remover(Node **head);
 void verificar_pares(Node *head, Node *tail);
+void liberar(Node **head);
 
 int main(){
 
     Node *head = NULL;
-    Node *tail = NULL;
+    Node *tail = NULL;      
+    int n;
 
+    for(int i = 0; i<10; i++){
+        
+        scanf("%d", &n);
+        inserir(&head, &tail, n);
+        if(i == 9) break;
+    }
 
-
+    verificar_pares(head, tail);
+    liberar(&head);
     return 0;
 
 }
@@ -63,6 +72,23 @@ void verificar_pares(Node *head, Node *tail){
 
     Node *aux = head;
 
-    
+    while(aux->next != tail->next){
+        if(aux->data %2 != 0){
+            printf("Existem números ímpares :(");
+            return;
+        }else{
+            aux = aux->next;
+        }
+    }
+    printf("Todos os números são pares :)");
+}
 
+void liberar(Node **head){
+
+    while(*head!=NULL){
+
+        Node *temp = *head;
+        *head = (*head)->next;
+        free(temp);
+    }
 }
