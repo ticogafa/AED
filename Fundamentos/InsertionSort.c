@@ -23,7 +23,7 @@ void printArray(int arr[], int LEN) {
 }
 
 int main() {
-    int arr[] = {10,9,8,7,6,5,4,3,2,1};
+    int arr[] = {37,43,123,12,32,65,86,98,90};
     int LEN = sizeof(arr) / sizeof(arr[0]);
 
     printArray(arr, LEN);
