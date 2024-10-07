@@ -29,14 +29,31 @@ int main(){
     }
 
     verificar_ordenacao(head, tail);
-    void liberar(Node **head);
+    liberar(&head);
     return 0;
 }
 
 void verificar_ordenacao(Node *head, Node *tail){
 
-    
+    if (head == NULL || head == tail) {
+        printf("\nLista em ordem crescente :)\n");
+        return;
+    }
 
+    Node *aux = head;
+
+    do{
+
+        if(aux->data > aux->next->data){
+            printf("\nA lista não está em ordem :(\n");
+            return;
+        }
+        aux = aux->next;
+
+    }while(aux->next != tail->next);
+
+    printf("\nLista em ordem crescente :)\n");
+    
 }
 
 void inserir(Node **head, Node **tail, int n){
@@ -58,10 +75,18 @@ void inserir(Node **head, Node **tail, int n){
 
 void liberar(Node **head){
 
-    while(*head!=NULL){
+   if(*head == NULL) return;
 
-        Node *temp = *head;
-        *head = (*head)->next;
-        free(temp);
-    }
+   Node *aux = *head;
+   Node *nextNode;
+
+   do{
+
+    nextNode = aux->next;
+    free(aux);
+    aux = nextNode;
+
+   }while(aux!=*head);
+
+    *head = NULL;
 }
