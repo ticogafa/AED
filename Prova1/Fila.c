@@ -16,7 +16,7 @@ typedef struct Node{
 
 }Node;
 
-void inserir(Node **head, Node **tail, int n);
+void inserirInicio(Node **head, Node **tail, int n);
 void remover(Node **head);
 void verificar_pares(Node *head, Node *tail);
 void liberar(Node **head);
@@ -30,7 +30,7 @@ int main(){
     for(int i = 0; i<10; i++){
         
         scanf("%d", &n);
-        inserir(&head, &tail, n);
+        inserirInicio(&head, &tail, n);
         if(i == 9) break;
     }
 
@@ -40,7 +40,7 @@ int main(){
 
 }
 
-void inserir(Node **head, Node **tail, int n){
+void inserirInicio(Node **head, Node **tail, int n){
 
     Node *newNode = (Node*)malloc(sizeof(Node));
 
