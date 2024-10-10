@@ -9,10 +9,21 @@ typedef struct Node {
 
 void inserir(Node **raiz, int chave);
 void preordem(Node *raiz);
+void liberarArvore(Node *raiz);
 
 int main(){
 
     Node *root = NULL;
+    inserir(&root, 5);
+    inserir(&root, 2);
+    inserir(&root, 4);
+    inserir(&root, 1);
+    inserir(&root, 3);
+    inserir(&root, 6);
+
+    preordem(root);
+    liberarArvore(root);
+
 
     return 0;
 
@@ -43,4 +54,12 @@ void preordem(Node *raiz){
         preordem(raiz->direita);
     }
 
+}
+
+void liberarArvore(Node *raiz) {
+    if (raiz != NULL) {
+        liberarArvore(raiz->esquerda);
+        liberarArvore(raiz->direita);
+        free(raiz);
+    }
 }
