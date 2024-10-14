@@ -10,6 +10,7 @@ typedef struct Node {
 void inserir(Node **raiz, int chave);
 void preordem(Node *raiz);
 void liberarArvore(Node *raiz);
+Node* encontrarMaior(Node *raiz);
 
 int main(){
 
@@ -63,4 +64,14 @@ void liberarArvore(Node *raiz) {
         liberarArvore(raiz->direita);
         free(raiz);
     }
+}
+
+Node *encontrarMaior(Node *raiz) {
+    if (raiz == NULL) {
+        return NULL;
+    }
+    if (raiz->direita == NULL) {
+        return raiz;
+    }
+    return encontrarMaior(raiz->direita);
 }
