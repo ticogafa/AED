@@ -3,74 +3,96 @@
 #include <string.h>
 
 typedef struct Node {
-    char nome[31];
+    char nome[30];
     int valor;
-    struct Node* prox;
-    struct Node* ant;
-} Node;
+    struct Node *prev;
+    struct Node *next;
+}Node;
 
-Node* criarNode(const char* nome, int valor) {
-    Node *newNode = (Node*)malloc(sizeof(Node));
-    strncpy(newNode->nome, nome, 30);
-    newNode->nome[30] = '\0';
-    newNode->valor = valor;
-    newNode->prox = newNode->ant = NULL;
-    return newNode;
-}
-
-void insertNode(Node** head, Node* newNode) {
-    if (*head == NULL) {
-        *head = newNode;
-        newNode->prox = newNode->ant = newNode;
-    } else {
-        newNode->prox = *head;
-        newNode->ant = (*head)->ant;
-        (*head)->ant->prox = newNode;
-        (*head)->ant = newNode;
-    }
-}
-
-char* jogar(Node* head) {
-    Node* atual = head;
-    while (atual->prox != atual) {
-        int passos = atual->valor;
-        int direcao = (passos % 2 == 0) ? 1 : -1;
-
-        for (int i = 0; i < passos; i++) {
-            atual = (direcao == 1) ? atual->prox : atual->ant;
-        }
-
-        Node* remover = atual;
-        atual = (direcao == 1) ? atual->prox : atual->ant;
-
-        remover->ant->prox = remover->prox;
-        remover->prox->ant = remover->ant;
-        free(remover);
-    }
-
-    char* nomeDoVencedor = (char*)malloc(31 * sizeof(char));
-    strncpy(nomeDoVencedor, atual->nome, 30);
-    nomeDoVencedor[30] = '\0';
-
-    free(atual);
-    return nomeDoVencedor;
-}
+void remover(Node **head, Node **tail, Node *node);
+void inserir(Node **head, Node **tail, char *nome, int valor);
 
 int main() {
-    int N;
-    while (scanf("%d", &N) == 1 && N != 0) {
-        Node* head = NULL;
-        for (int i = 0; i < N; i++) {
-            char nome[31];
+    while (1) {
+        int N, i, j;
+        Node *head = NULL;
+        Node *tail = NULL;
+
+        scanf("%d", &N);
+        if (!N)
+            break;
+
+        for (i = 0; i < N; ++i) {
+            char nome[30];
             int valor;
-            scanf("%s %d", nome, &valor);
-            insertNode(&head, criarNode(nome, valor));
+            scanf("%s%d", nome, &valor);
+            inserir(&head, &tail, nome, valor);
         }
 
-        char* vencedor = jogar(head);
-        printf("Vencedor(a): %s\n", vencedor);
-        free(vencedor);
+        Node *aux = head;
+        while (N > 1) {
+            int valor = aux->valor;
+
+            if (valor % 2) {
+                for (j = 0; j < valor; ++j)
+                    aux = aux->next;
+            } else {
+                for (j = 0; j < valor; ++j)
+                    aux = aux->prev;
+            }
+
+            Node *temp = aux;
+            if (valor % 2) {
+                aux = aux->next;
+            } else {
+                aux = aux->prev;
+            }
+            remover(&head, &tail, temp);
+
+            --N;
+        }
+
+        printf("Vencedor(a): %s\n", head->nome);
+        free(head);
     }
 
     return 0;
+}
+
+void remover(Node **head, Node **tail, Node *node) {
+    if (node->next == node) {
+        *head = NULL;
+        *tail = NULL;
+    } else {
+        Node *NodeAnterior = node->prev;
+        Node *NodeProximo = node->next;
+        NodeAnterior->next = NodeProximo;
+        NodeProximo->prev = NodeAnterior;
+        if (*head == node) {
+            *head = NodeProximo;
+        }
+        if (*tail == node) {
+            *tail = NodeAnterior;
+        }
+    }
+    free(node);
+}
+
+void inserir(Node **head, Node **tail, char *nome, int valor) {
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    strcpy(newNode->nome, nome);
+    newNode->valor = valor;
+
+    if (*head == NULL) {
+        newNode->next = newNode;
+        newNode->prev = newNode;
+        *head = newNode;
+        *tail = newNode;
+    } else {
+        newNode->next = *head;
+        newNode->prev = *tail;
+        (*tail)->next = newNode;
+        (*head)->prev = newNode;
+        *tail = newNode;
+    }
 }
