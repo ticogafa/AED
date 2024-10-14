@@ -2,66 +2,70 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct Node {
-    char name[30];
-    int value;
+typedef struct Node {
+    char nome[30];
+    int valor;
     struct Node *prev;
     struct Node *next;
-};
+}Node;
 
-void removeNode(struct Node **head, struct Node **tail, struct Node *node);
-void insertNode(struct Node **head, struct Node **tail, char *name, int value);
+void remover(Node **head, Node **tail, Node *node);
+void inserir(Node **head, Node **tail, char *nome, int valor);
 
 int main() {
     while (1) {
         int N, i, j;
-        struct Node *head = NULL;
-        struct Node *tail = NULL;
+        Node *head = NULL;
+        Node *tail = NULL;
 
         scanf("%d", &N);
         if (!N)
             break;
 
         for (i = 0; i < N; ++i) {
-            char name[30];
-            int value;
-            scanf("%s%d", name, &value);
-            insertNode(&head, &tail, name, value);
+            char nome[30];
+            int valor;
+            scanf("%s%d", nome, &valor);
+            inserir(&head, &tail, nome, valor);
         }
 
-        struct Node *current = head;
+        Node *aux = head;
         while (N > 1) {
-            int value = current->value;
+            int valor = aux->valor;
 
-            if (value % 2) {
-                for (j = 0; j < value; ++j)
-                    current = current->next;
+            if (valor % 2) {
+                for (j = 0; j < valor; ++j)
+                    aux = aux->next;
             } else {
-                for (j = 0; j < value; ++j)
-                    current = current->prev;
+                for (j = 0; j < valor; ++j)
+                    aux = aux->prev;
             }
 
-            struct Node *toRemove = current;
-            current = (value % 2) ? current->next : current->prev;
-            removeNode(&head, &tail, toRemove);
+            Node *temp = aux;
+            if (valor % 2) {
+                aux = aux->next;
+            } else {
+                aux = aux->prev;
+            }
+            remover(&head, &tail, temp);
 
             --N;
         }
 
-        printf("Vencedor(a): %s\n", head->name);
+        printf("Vencedor(a): %s\n", head->nome);
         free(head);
     }
 
     return 0;
 }
 
-void removeNode(struct Node **head, struct Node **tail, struct Node *node) {
+void remover(Node **head, Node **tail, Node *node) {
     if (node->next == node) {
         *head = NULL;
         *tail = NULL;
     } else {
-        struct Node *prevNode = node->prev;
-        struct Node *nextNode = node->next;
+        Node *prevNode = node->prev;
+        Node *nextNode = node->next;
         prevNode->next = nextNode;
         nextNode->prev = prevNode;
         if (*head == node) {
@@ -74,10 +78,10 @@ void removeNode(struct Node **head, struct Node **tail, struct Node *node) {
     free(node);
 }
 
-void insertNode(struct Node **head, struct Node **tail, char *name, int value) {
-    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
-    strcpy(newNode->name, name);
-    newNode->value = value;
+void inserir(Node **head, Node **tail, char *nome, int valor) {
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    strcpy(newNode->nome, nome);
+    newNode->valor = valor;
 
     if (*head == NULL) {
         newNode->next = newNode;
