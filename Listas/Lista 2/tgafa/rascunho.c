@@ -9,43 +9,8 @@ struct Node {
     struct Node *next;
 };
 
-void insertNode(struct Node **head, struct Node **tail, char *name, int value) {
-    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
-    strcpy(newNode->name, name);
-    newNode->value = value;
-
-    if (*head == NULL) {
-        newNode->next = newNode;
-        newNode->prev = newNode;
-        *head = newNode;
-        *tail = newNode;
-    } else {
-        newNode->next = *head;
-        newNode->prev = *tail;
-        (*tail)->next = newNode;
-        (*head)->prev = newNode;
-        *tail = newNode;
-    }
-}
-
-void removeNode(struct Node **head, struct Node **tail, struct Node *node) {
-    if (node->next == node) {
-        *head = NULL;
-        *tail = NULL;
-    } else {
-        struct Node *prevNode = node->prev;
-        struct Node *nextNode = node->next;
-        prevNode->next = nextNode;
-        nextNode->prev = prevNode;
-        if (*head == node) {
-            *head = nextNode;
-        }
-        if (*tail == node) {
-            *tail = prevNode;
-        }
-    }
-    free(node);
-}
+void removeNode(struct Node **head, struct Node **tail, struct Node *node);
+void insertNode(struct Node **head, struct Node **tail, char *name, int value);
 
 int main() {
     while (1) {
@@ -88,4 +53,42 @@ int main() {
     }
 
     return 0;
+}
+
+void removeNode(struct Node **head, struct Node **tail, struct Node *node) {
+    if (node->next == node) {
+        *head = NULL;
+        *tail = NULL;
+    } else {
+        struct Node *prevNode = node->prev;
+        struct Node *nextNode = node->next;
+        prevNode->next = nextNode;
+        nextNode->prev = prevNode;
+        if (*head == node) {
+            *head = nextNode;
+        }
+        if (*tail == node) {
+            *tail = prevNode;
+        }
+    }
+    free(node);
+}
+
+void insertNode(struct Node **head, struct Node **tail, char *name, int value) {
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    strcpy(newNode->name, name);
+    newNode->value = value;
+
+    if (*head == NULL) {
+        newNode->next = newNode;
+        newNode->prev = newNode;
+        *head = newNode;
+        *tail = newNode;
+    } else {
+        newNode->next = *head;
+        newNode->prev = *tail;
+        (*tail)->next = newNode;
+        (*head)->prev = newNode;
+        *tail = newNode;
+    }
 }
