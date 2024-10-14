@@ -64,15 +64,15 @@ void remover(Node **head, Node **tail, Node *node) {
         *head = NULL;
         *tail = NULL;
     } else {
-        Node *prevNode = node->prev;
-        Node *nextNode = node->next;
-        prevNode->next = nextNode;
-        nextNode->prev = prevNode;
+        Node *NodeAnterior = node->prev;
+        Node *NodeProximo = node->next;
+        NodeAnterior->next = NodeProximo;
+        NodeProximo->prev = NodeAnterior;
         if (*head == node) {
-            *head = nextNode;
+            *head = NodeProximo;
         }
         if (*tail == node) {
-            *tail = prevNode;
+            *tail = NodeAnterior;
         }
     }
     free(node);
