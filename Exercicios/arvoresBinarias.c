@@ -8,6 +8,7 @@ typedef struct Node {
 }Node;
 
 void preordem(Node *raiz);
+void inordem(Node *raiz);
 void inserir(Node **raiz, int chave);
 
 int main(){
@@ -18,17 +19,33 @@ int main(){
 	inserir(&raiz, 5);
 	inserir(&raiz, 3);
 	inserir(&raiz, 7);
-
+	
+	printf("Preordem: ");
 	preordem(raiz);
+	printf("\nInordem: ");
+	inordem(raiz);
 
 	inserir(&raiz, 8);
 	inserir(&raiz, 4);
 	inserir(&raiz, 2);
 
 	printf("\n");
+	printf("Preordem: ");
 	preordem(raiz);
+	printf("\nInordem: ");
+	inordem(raiz);
 
 	return 0;
+}
+
+void inordem(Node *raiz){
+	
+	if(raiz!=NULL){
+		inordem(raiz->esquerda);
+		printf("%d ", raiz->chave);
+		inordem(raiz->direita);
+	}
+
 }
 
 void preordem(Node *raiz){
