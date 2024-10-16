@@ -52,7 +52,6 @@ void inserir(Node **raiz, int chave){
         }
     }
 
-
 }
 
 void preordem(Node *raiz){
