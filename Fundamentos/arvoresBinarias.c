@@ -11,6 +11,8 @@ void inserir(Node **raiz, int chave);
 void preordem(Node *raiz);
 void liberarArvore(Node *raiz);
 Node* encontrarMaior(Node *raiz);
+void remover(Node **pRaiz, int numero);
+Node *MaiorDireita(Node **no);
 
 int main(){
 
@@ -23,6 +25,10 @@ int main(){
     inserir(&root, 6);
 
     preordem(root);
+    printf("\n");
+    remover(&root, 4);
+    preordem(root);
+    printf("\n");
     liberarArvore(root);
 
 
@@ -75,3 +81,58 @@ Node *encontrarMaior(Node *raiz) {
     }
     return encontrarMaior(raiz->direita);
 }
+
+Node *MaiorDireita(Node **no) {
+  if ((*no)->direita != NULL)
+    return MaiorDireita(&(*no)->direita);
+  else {
+    Node *aux = *no;
+    if ((*no)->esquerda != NULL) {
+      *no = (*no)->esquerda;
+    } else {
+      *no = NULL;
+    }
+    return aux;
+  }
+}
+
+void remover(Node **pRaiz, int numero) {
+  if (*pRaiz == NULL) {
+    printf("Numero nao existe na arvore!");
+    return;
+  }
+  if (numero < (*pRaiz)->chave)
+    remover(&(*pRaiz)->esquerda, numero);
+  else if (numero > (*pRaiz)->chave)
+    remover(&(*pRaiz)->direita, numero);
+  else {
+    Node *pAux = *pRaiz;
+    // 01 - no sem filhos
+    if (((*pRaiz)->esquerda == NULL) && ((*pRaiz)->direita == NULL)) {
+      free(pAux);
+      (*pRaiz) = NULL;
+    } else {
+      // 02 - no com filho direito
+      if ((*pRaiz)->esquerda == NULL) {
+        (*pRaiz) = (*pRaiz)->direita;
+        pAux->direita = NULL;
+        free(pAux);
+      } else {
+        // 02 - no com filho esquerdo
+        if ((*pRaiz)->direita == NULL) {
+          (*pRaiz) = (*pRaiz)->esquerda;
+          pAux->esquerda = NULL;
+          free(pAux);
+        } else {
+          // 03 - no com dois filhos
+          pAux = MaiorDireita(&(*pRaiz)->esquerda);
+          pAux->esquerda = (*pRaiz)->esquerda;
+          pAux->direita = (*pRaiz)->direita;
+          free(*pRaiz);
+          *pRaiz = pAux;
+        }
+      }
+    }
+  }
+}
+
