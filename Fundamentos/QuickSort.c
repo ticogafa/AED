@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-void quickSortNatacha(int v[], int inicio, int fim);
+void quickSort(int v[], int inicio, int fim);
 int particao(int v[], int inicio, int fim);
 void troca(int v[], int i, int j);
 
@@ -17,7 +17,7 @@ int main() {
     for(i = 0; i < n; i++) {
         printf("%d ", vetor[i]);
     }
-    quickSortNatacha(vetor, 0, n - 1);
+    quickSort(vetor, 0, n - 1);
     printf("\nVetor ordenado:\n");
     for(i = 0; i < n; i++) {
         printf("%d ", vetor[i]);
@@ -30,12 +30,12 @@ int main() {
     return 0;
 }
 
-void quickSortNatacha(int v[], int inicio, int fim){
+void quickSort(int v[], int inicio, int fim){
     if(inicio<fim){
         int indice = particao(v, inicio, fim);
 
-        quickSortNatacha(v, inicio, indice-1);
-        quickSortNatacha(v, indice+1, fim);
+        quickSort(v, inicio, indice-1);
+        quickSort(v, indice+1, fim);
     }
 }
 
