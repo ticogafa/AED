@@ -11,6 +11,7 @@ void preordem(Node *raiz);
 void inordem(Node *raiz);
 void posordem(Node *raiz);
 void inserir(Node **raiz, int chave);
+int buscar(Node *raiz, int chave);
 
 int main(){
 	
@@ -20,6 +21,12 @@ int main(){
 	inserir(&raiz, 5);
 	inserir(&raiz, 3);
 	inserir(&raiz, 7);
+	inserir(&raiz, 9);
+	inserir(&raiz, 1);
+	inserir(&raiz, 2);
+	inserir(&raiz, 10);
+	inserir(&raiz, 8);
+	
 	
 	printf("Preordem: ");
 	preordem(raiz);
@@ -40,8 +47,23 @@ int main(){
 	printf("\nPosordem: ");
 	posordem(raiz);
 	printf("\n");
+	
+	printf("Busca: %d\n", buscar(raiz, 5));
 
 	return 0;
+}
+
+int buscar(Node *raiz, int chave){
+	
+	if(raiz == NULL){
+		return 0;
+	}else if(raiz->chave == chave){
+		return 1;
+	}else if(chave < raiz->chave){
+		return buscar(raiz->esquerda, chave);
+	}else{
+		return buscar(raiz->direita, chave);
+	}
 }
 
 void posordem(Node *raiz){
