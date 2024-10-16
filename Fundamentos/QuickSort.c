@@ -31,6 +31,7 @@ int main() {
 }
 
 void quickSort(int v[], int inicio, int fim){
+    
     if(inicio<fim){
 
         int indice = particao(v, inicio, fim);
@@ -42,7 +43,7 @@ void quickSort(int v[], int inicio, int fim){
 }
 
 int particao(int v[], int inicio, int fim){ 
-    
+
     int pivo = v[inicio];
     int i;
     int indice = fim;
