@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 typedef struct Node {
 
 	int chave;
@@ -20,6 +19,13 @@ int main(){
 	inserir(&raiz, 3);
 	inserir(&raiz, 7);
 
+	preordem(raiz);
+
+	inserir(&raiz, 8);
+	inserir(&raiz, 4);
+	inserir(&raiz, 2);
+
+	printf("\n");
 	preordem(raiz);
 
 	return 0;
