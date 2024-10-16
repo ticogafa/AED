@@ -26,14 +26,16 @@ int main(){
 	inserir(&raiz, 2);
 	inserir(&raiz, 10);
 	inserir(&raiz, 8);
+
 	
-	
+
 	printf("Preordem: ");
 	preordem(raiz);
 	printf("\nInordem: ");
 	inordem(raiz);
 	printf("\nPosordem: ");
 	posordem(raiz);
+	printf("\nBuscar o número 4: %d\n", buscar(raiz, 4));
 
 	inserir(&raiz, 8);
 	inserir(&raiz, 4);
@@ -48,7 +50,7 @@ int main(){
 	posordem(raiz);
 	printf("\n");
 	
-	printf("Busca: %d\n", buscar(raiz, 5));
+	printf("Buscar o número 4: %d\n", buscar(raiz, 5));
 
 	return 0;
 }
