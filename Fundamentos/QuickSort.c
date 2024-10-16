@@ -32,10 +32,12 @@ int main() {
 
 void quickSort(int v[], int inicio, int fim){
     if(inicio<fim){
+
         int indice = particao(v, inicio, fim);
 
         quickSort(v, inicio, indice-1);
         quickSort(v, indice+1, fim);
+
     }
 }
 
@@ -45,18 +47,24 @@ int particao(int v[], int inicio, int fim){
     int indice = fim;
 
     for(i = fim; i > inicio; i--){
+
         if(v[i] >= pivo){
+
             troca(v, i, indice);
             indice--;
+        
         }
     }
+
     troca(v, inicio, indice);
 
     return indice;
 }
 
 void troca(int v[], int i, int j){
+    
     int aux = v[i];
     v[i] = v[j];
     v[j] = aux;
+
 }
