@@ -40,17 +40,18 @@ void inserir(Node **raiz, int chave){
 
     if(*raiz == NULL){
         Node *newNode = (Node*)malloc(sizeof(Node));
-        newNode->chave  = chave;
+        newNode->chave = chave;
         newNode->esquerda = NULL;
         newNode->direita = NULL;
         *raiz = newNode;
     }else{
-        if(chave < (*raiz)->chave){
+        if((*raiz)->chave > chave){
             inserir(&(*raiz)->esquerda, chave);
-        }else if(chave > (*raiz)->chave){
+        }else if((*raiz)->chave < chave){
             inserir(&(*raiz)->direita, chave);
         }
     }
+
 
 }
 
