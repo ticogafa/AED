@@ -8,6 +8,7 @@ typedef struct Node {
 	struct Node *esquerda, *direita;
 }Node;
 
+void preordem(Node *raiz);
 void inserir(Node **raiz, int chave);
 
 int main(){
@@ -19,9 +20,20 @@ int main(){
 	inserir(&raiz, 3);
 	inserir(&raiz, 7);
 
-
+	preordem(raiz);
 
 	return 0;
+}
+
+void preordem(Node *raiz){
+	
+	if(raiz!=NULL){
+		printf("%d ", raiz->chave);
+		preordem(raiz->esquerda);
+		preordem(raiz->direita);
+
+	}
+
 }
 
 void inserir(Node **raiz, int chave){
