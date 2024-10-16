@@ -13,6 +13,8 @@ void liberarArvore(Node *raiz);
 Node* encontrarMaior(Node *raiz);
 void remover(Node **pRaiz, int numero);
 Node *MaiorDireita(Node **no);
+void inordem(Node *raiz);
+void posordem(Node *raiz);
 
 int main(){
 
@@ -62,6 +64,22 @@ void preordem(Node *raiz){
         preordem(raiz->direita);
     }
 
+}
+
+void inordem(Node *raiz) {
+  if (raiz != NULL) {
+    inordem(raiz->esquerda);
+    printf("%d ", raiz->chave);
+    inordem(raiz->direita);
+  }
+}
+
+void posordem(Node *raiz) {
+  if (raiz != NULL) {
+    posordem(raiz->esquerda);
+    posordem(raiz->direita);
+    printf("%d ", raiz->chave);
+  }
 }
 
 void liberarArvore(Node *raiz) {
