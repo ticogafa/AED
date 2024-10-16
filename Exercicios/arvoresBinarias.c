@@ -9,6 +9,7 @@ typedef struct Node {
 
 void preordem(Node *raiz);
 void inordem(Node *raiz);
+void posordem(Node *raiz);
 void inserir(Node **raiz, int chave);
 
 int main(){
@@ -24,6 +25,8 @@ int main(){
 	preordem(raiz);
 	printf("\nInordem: ");
 	inordem(raiz);
+	printf("\nPosordem: ");
+	posordem(raiz);
 
 	inserir(&raiz, 8);
 	inserir(&raiz, 4);
@@ -34,8 +37,21 @@ int main(){
 	preordem(raiz);
 	printf("\nInordem: ");
 	inordem(raiz);
+	printf("\nPosordem: ");
+	posordem(raiz);
+	printf("\n");
 
 	return 0;
+}
+
+void posordem(Node *raiz){
+	
+	if(raiz!=NULL){
+		posordem(raiz->esquerda);
+		posordem(raiz->direita);
+		printf("%d ", raiz->chave);
+	}
+
 }
 
 void inordem(Node *raiz){
@@ -79,5 +95,4 @@ void inserir(Node **raiz, int chave){
 
 	}
 	
-
 }
