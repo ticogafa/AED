@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 typedef struct Node {
-
     int chave;
     struct Node *esquerda, *direita;
 }Node;
@@ -32,7 +31,6 @@ int main(){
     preordem(root);
     printf("\n");
     liberarArvore(root);
-
 
     return 0;
 
