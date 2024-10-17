@@ -109,54 +109,54 @@ Node *encontrarMaior(Node *raiz) {
     return encontrarMaior(raiz->direita);
 }
 
-Node *MaiorDireita(Node **no) {
-  if ((*no)->direita != NULL)
-    return MaiorDireita(&(*no)->direita);
+Node *MaiorDireita(Node **raiz) {
+  if ((*raiz)->direita != NULL)
+    return MaiorDireita(&(*raiz)->direita);
   else {
-    Node *aux = *no;
-    if ((*no)->esquerda != NULL) {
-      *no = (*no)->esquerda;
+    Node *aux = *raiz;
+    if ((*raiz)->esquerda != NULL) {
+      *raiz = (*raiz)->esquerda;
     } else {
-      *no = NULL;
+      *raiz = NULL;
     }
     return aux;
   }
 }
 
-void remover(Node **pRaiz, int numero) {
-  if (*pRaiz == NULL) {
+void remover(Node **raiz, int numero) {
+  if (*raiz == NULL) {
     printf("Numero nao existe na arvore!");
     return;
   }
-  if (numero < (*pRaiz)->chave)
-    remover(&(*pRaiz)->esquerda, numero);
-  else if (numero > (*pRaiz)->chave)
-    remover(&(*pRaiz)->direita, numero);
+  if (numero < (*raiz)->chave)
+    remover(&(*raiz)->esquerda, numero);
+  else if (numero > (*raiz)->chave)
+    remover(&(*raiz)->direita, numero);
   else {
-    Node *pAux = *pRaiz;
+    Node *aux = *raiz;
     // 01 - no sem filhos
-    if (((*pRaiz)->esquerda == NULL) && ((*pRaiz)->direita == NULL)) {
-      free(pAux);
-      (*pRaiz) = NULL;
+    if (((*raiz)->esquerda == NULL) && ((*raiz)->direita == NULL)) {
+      free(aux);
+      (*raiz) = NULL;
     } else {
       // 02 - no com filho direito
-      if ((*pRaiz)->esquerda == NULL) {
-        (*pRaiz) = (*pRaiz)->direita;
-        pAux->direita = NULL;
-        free(pAux);
+      if ((*raiz)->esquerda == NULL) {
+        (*raiz) = (*raiz)->direita;
+        aux->direita = NULL;
+        free(aux);
       } else {
         // 02 - no com filho esquerdo
-        if ((*pRaiz)->direita == NULL) {
-          (*pRaiz) = (*pRaiz)->esquerda;
-          pAux->esquerda = NULL;
-          free(pAux);
+        if ((*raiz)->direita == NULL) {
+          (*raiz) = (*raiz)->esquerda;
+          aux->esquerda = NULL;
+          free(aux);
         } else {
           // 03 - no com dois filhos
-          pAux = MaiorDireita(&(*pRaiz)->esquerda);
-          pAux->esquerda = (*pRaiz)->esquerda;
-          pAux->direita = (*pRaiz)->direita;
-          free(*pRaiz);
-          *pRaiz = pAux;
+          aux = MaiorDireita(&(*raiz)->esquerda);
+          aux->esquerda = (*raiz)->esquerda;
+          aux->direita = (*raiz)->direita;
+          free(*raiz);
+          *raiz = aux;
         }
       }
     }
