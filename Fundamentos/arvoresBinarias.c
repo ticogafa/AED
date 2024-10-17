@@ -14,6 +14,7 @@ void remover(Node **pRaiz, int numero);
 Node *MaiorDireita(Node **no);
 void inordem(Node *raiz);
 void posordem(Node *raiz);
+int buscar(Node *raiz, int chave);
 
 int main(){
 
@@ -25,15 +26,25 @@ int main(){
     inserir(&root, 3);
     inserir(&root, 6);
 
+    printf("\nBuscar número 4: %d\n", buscar(root, 4));
     preordem(root);
     printf("\n");
     remover(&root, 4);
+    printf("\nBuscar número 4: %d\n", buscar(root, 4));
     preordem(root);
     printf("\n");
     liberarArvore(root);
 
     return 0;
 
+}
+
+int buscar(Node *raiz, int chave){
+
+    if(raiz == NULL) return 0;
+    if(raiz->chave == chave) return 1;
+    else if(chave < raiz->chave) return buscar(raiz->esquerda, chave);
+    else return buscar(raiz->direita, chave);
 }
  
 void inserir(Node **raiz, int chave){
