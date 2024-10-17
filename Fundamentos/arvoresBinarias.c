@@ -42,7 +42,7 @@ int main(){
 int buscar(Node *raiz, int chave){
 
     if(raiz == NULL) return 0;
-    if(raiz->chave == chave) return 1;
+    else if(raiz->chave == chave) return 1;
     else if(chave < raiz->chave) return buscar(raiz->esquerda, chave);
     else return buscar(raiz->direita, chave);
 }
