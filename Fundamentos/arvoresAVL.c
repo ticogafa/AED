@@ -6,4 +6,13 @@ typedef struct Node {
     int data;
     struct Node *esquerda, *direita;
     
-}Node;
+}Node; 
+
+
+
+int main(){
+
+    Node *raiz;
+
+    return 0;
+}
