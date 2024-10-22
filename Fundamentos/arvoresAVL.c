@@ -7,3 +7,12 @@ typedef struct Node {
     struct Node *esquerda, *direita;
     
 }Node; 
+
+
+
+int main(){
+
+    Node *raiz;
+
+    return 0;
+}
