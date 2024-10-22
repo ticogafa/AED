@@ -11,7 +11,7 @@ int altura(Node *raiz);
 void preordem(Node *raiz);
 void liberarArvore(Node *raiz);
 Node* encontrarMaior(Node *raiz);
-void remover(Node **pRaiz, int numero);
+void remover(Node **raiz, int numero);
 Node *MaiorDireita(Node **no);
 void inordem(Node *raiz);
 void posordem(Node *raiz);
