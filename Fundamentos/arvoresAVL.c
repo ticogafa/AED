@@ -6,4 +6,4 @@ typedef struct Node {
     int data;
     struct Node *esquerda, *direita;
     
-}Node;
+}Node; 
