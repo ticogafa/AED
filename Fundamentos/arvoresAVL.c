@@ -29,13 +29,9 @@ int main() {
   inserir(&t, 1);
   printf("\n>>Rotação devido a inserção do 1\n");
 
-
   printf("\nPRE-ordem:");
   preordem(t);
   printf("\n");
-
-
-
 
   return 0;
 }
