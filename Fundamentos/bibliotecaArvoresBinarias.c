@@ -25,20 +25,18 @@ int main(){
 
 	inordem(raiz);
 
-
 	return 0;
 }
 
 void inordem(Node *raiz){
 
 	if(raiz!=NULL){
-		
+
 		inordem(raiz->esq);
 		printf("%d ", raiz->chave);
 		inordem(raiz->dir);
 	}
 	
-
 }
 
 void inserir(Node **raiz, int chave){
@@ -58,5 +56,4 @@ void inserir(Node **raiz, int chave){
 
 	}
 	
-
 }
