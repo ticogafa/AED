@@ -7,30 +7,19 @@ typedef struct No {
     struct No* dir;
 } Arv;
 
-int qtdFolhas(Arv *raiz, int chave) {
+int qtdFolhas(Arv *raiz) {
     if (raiz == NULL) {
-        printf("Árvore vazia!\n");
         return 0;
     }
 
-    if (raiz->chave == chave) {
-        if (raiz->esq == NULL && raiz->dir == NULL) {
-            return 1;
-        }
-        else {
-            return qtdFolhas(raiz->esq, chave) + qtdFolhas(raiz->dir, chave);
-        }
+    if (raiz->esq == NULL && raiz->dir == NULL) {
+        return 1;
     }
-    else if (chave < raiz->chave) {
-        return qtdFolhas(raiz->esq, chave);
-    }
-    else {
-        return qtdFolhas(raiz->dir, chave);
-    }
+
+    return qtdFolhas(raiz->esq) + qtdFolhas(raiz->dir);
 }
 
 int main() {
-    // Cria uma árvore binária de exemplo
     Arv* raiz = (Arv*)malloc(sizeof(Arv));
     raiz->chave = 10;
     raiz->esq = (Arv*)malloc(sizeof(Arv));
@@ -51,16 +40,16 @@ int main() {
     raiz->dir->dir->esq = NULL;
     raiz->dir->dir->dir = NULL;
 
-    // Exibe a quantidade de folhas na subárvore com raiz no nó 5
-    int numFolhas = qtdFolhas(raiz, 5);
-    printf("Quantidade de folhas na subárvore com raiz no nó 5: %d\n", numFolhas);
+    int numFolhas = qtdFolhas(raiz);
+    printf("Quantidade de folhas na árvore: %d\n", numFolhas);
 
-    // Exibe a quantidade de folhas na subárvore com raiz no nó 15
-    numFolhas = qtdFolhas(raiz, 15);
-    printf("Quantidade de folhas na subárvore com raiz no nó 15: %d\n", numFolhas);
-
-    // Tenta acessar um nó que não existe na árvore
-    numFolhas = qtdFolhas(raiz, 25);
+    // Liberar memória alocada
+    free(raiz->dir->dir);
+    free(raiz->dir);
+    free(raiz->esq->dir);
+    free(raiz->esq->esq);
+    free(raiz->esq);
+    free(raiz);
 
     return 0;
 }
