@@ -41,13 +41,6 @@ int main() {
     return 0;
 }
 
-int buscar(Node *raiz, int chave) {
-    if (raiz == NULL) return 0;
-    else if (raiz->chave == chave) return 1;
-    else if (chave < raiz->chave) return buscar(raiz->esquerda, chave);
-    else return buscar(raiz->direita, chave);
-}
-
 void inserir(Node **raiz, int chave) {
     if (*raiz == NULL) {
         Node *newNode = (Node*)malloc(sizeof(Node));
@@ -66,6 +59,13 @@ void inserir(Node **raiz, int chave) {
             inserir(&(*raiz)->direita, chave);
         }
     }
+}
+
+int buscar(Node *raiz, int chave) {
+    if (raiz == NULL) return 0;
+    else if (raiz->chave == chave) return 1;
+    else if (chave < raiz->chave) return buscar(raiz->esquerda, chave);
+    else return buscar(raiz->direita, chave);
 }
 
 void preordem(Node *raiz) {
