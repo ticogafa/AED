@@ -89,3 +89,29 @@ Node* MaiorDireita(Node **raiz){
         return aux;
     }
 }
+
+void remover(Node **raiz, int chave){
+    if(*raiz == NULL) return;
+    if(chave > (*raiz)->chave) remover(&(*raiz)->direita, chave);
+    else if(chave < (*raiz)->chave) remover(&(*raiz)->esquerda, chave);
+    else{
+        Node *aux = *raiz;
+
+        if((*raiz)->esquerda == NULL && (*raiz)->direita == NULL){
+            free(aux);
+            *raiz == NULL;
+        }else if((*raiz)->esquerda == NULL){
+            *raiz = (*raiz)->direita;
+            free(aux);
+        }else if((*raiz)->direita == NULL){
+            *raiz = (*raiz)->esquerda;
+            free(aux);
+        }else{
+            aux = MaiorDireita(&(*raiz)->esquerda);
+            aux->esquerda = (*raiz)->esquerda;
+            aux->direita = (*raiz)->direita;
+            free(*raiz);
+            *raiz = aux;
+        }
+    }
+}
