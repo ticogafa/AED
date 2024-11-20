@@ -192,7 +192,9 @@ int arvBalanceada(Node *raiz) {
     int alturaEsquerda = altura(raiz->esquerda);
     int alturaDireita = altura(raiz->direita);
 
-    if (abs(alturaEsquerda - alturaDireita) <= 1 &&
+    int fatorBalanceamento = alturaDireita - alturaEsquerda;
+
+    if (abs(fatorBalanceamento) <= 1 &&
         arvBalanceada(raiz->esquerda) &&
         arvBalanceada(raiz->direita))
         return 1;
