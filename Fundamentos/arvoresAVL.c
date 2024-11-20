@@ -114,15 +114,15 @@ void inserir(Arv **raiz, int n) {
     balanco(raiz);
 }
 
-Arv *MaiorDireita(Arv **no) {
-  if ((*no)->dir != NULL)
-    return MaiorDireita(&(*no)->dir);
+Arv *MaiorDireita(Arv **raiz) {
+  if ((*raiz)->dir != NULL)
+    return MaiorDireita(&(*raiz)->dir);
   else {
-    Arv *aux = *no;
-    if ((*no)->esq != NULL) {
-      *no = (*no)->esq;
+    Arv *aux = *raiz;
+    if ((*raiz)->esq != NULL) {
+      *raiz = (*raiz)->esq;
     } else {
-      *no = NULL;
+      *raiz = NULL;
     }
     return aux;
   }
