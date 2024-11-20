@@ -8,9 +8,24 @@ typedef struct Node {
 
 }Node;
 
+int altura(Node *raiz);
+void rodarDireita(Node **raiz);
+void rodarEsquerda(Node **raiz);
+void balanceamento(Node **raiz);
+void inserir(Node **raiz, int chave);
+
 int main(){
 
+    Node *raiz = NULL;
 
+    inserir(&raiz, 10);
+    inserir(&raiz, 20);
+    inserir(&raiz, 30);
+    inserir(&raiz, 40);
+    inserir(&raiz, 50);
+    inserir(&raiz, 25);
+
+    printf("Altura da árvore: %d\n", altura(raiz));
 
     return 0;
 }
