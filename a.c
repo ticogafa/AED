@@ -15,6 +15,7 @@ void liberar(Node *raiz);
 Node* encontrarMaior(Node *raiz);
 Node* MaiorDireita(Node **raiz);
 void remover(Node **raiz, int chave);
+int altura(Node *raiz);
 
 int main(){
 
@@ -39,6 +40,8 @@ int main(){
     printf("Pos-ordem: ");
     posordem(raiz);
     printf("\n");
+
+    printf("Altura da árvore: %d\n", altura(raiz));
 
     int chave = 40;
     if(buscar(raiz, chave))
@@ -137,22 +140,33 @@ void remover(Node **raiz, int numero) {
     else if (numero > (*raiz)->chave) remover(&(*raiz)->direita, numero);
     else {
         Node *aux = *raiz;
-        // 01 - no sem filhos
         if ((*raiz)->esquerda == NULL && (*raiz)->direita == NULL) {
             free(aux);
             *raiz = NULL;
-        } else if ((*raiz)->esquerda == NULL) { // 02 - no com filho direito
+        } else if ((*raiz)->esquerda == NULL) { 
             *raiz = (*raiz)->direita;
             free(aux);
-        } else if ((*raiz)->direita == NULL) { // 02 - no com filho esquerdo
+        } else if ((*raiz)->direita == NULL) {
             *raiz = (*raiz)->esquerda;
             free(aux);
-        } else { // 03 - no com dois filhos
+        } else { 
             aux = MaiorDireita(&(*raiz)->esquerda);
             aux->esquerda = (*raiz)->esquerda;
             aux->direita = (*raiz)->direita;
             free(*raiz);
             *raiz = aux;
         }
+    }
+}
+
+int altura(Node *raiz){
+
+    if(raiz == NULL) return -1;
+    else{
+        int alturaEsquerda = altura(raiz->esquerda);
+        int alturaDireita = altura(raiz->direita);
+        
+        if(alturaEsquerda > alturaDireita) return alturaEsquerda + 1;
+        else return alturaDireita + 1;
     }
 }
