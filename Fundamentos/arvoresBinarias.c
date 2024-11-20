@@ -185,3 +185,15 @@ void filhosEsquerdos(Node *raiz){
     filhosEsquerdos(raiz->direita);
     
 }
+
+int verificarAVL(Node **raiz){
+
+    if(*raiz == NULL) return 1;
+    else{
+
+        int fatorBalanceamento = altura((*raiz)->direita) - altura((*raiz)->esquerda);
+
+        if(fatorBalanceamento>= -1 && fatorBalanceamento <= 1) return 1;
+        else return 0;
+    }
+}
