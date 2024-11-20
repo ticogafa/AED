@@ -11,7 +11,6 @@ int filhosAlt(Arv *r);
 void roda_dir(Arv **p);
 void roda_esq(Arv **p);
 void balanco(Arv **p);
-
 void inserir(Arv **t, int num);
 void preordem(Arv *t);
 void remover(Arv **pRaiz, int numero);
