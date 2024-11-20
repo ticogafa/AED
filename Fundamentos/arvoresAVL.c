@@ -33,59 +33,59 @@ int main() {
   printf("\n");
 
   return 0;
-}
+} 
 
-int filhosAlt(Arv *r) {
-  if (r == NULL)
+int filhosAlt(Arv *raiz) {
+  if (raiz == NULL)
     return 0;
   else {
-    int ae = filhosAlt(r->esq);
-    int ad = filhosAlt(r->dir);
+    int ae = filhosAlt(raiz->esq);
+    int ad = filhosAlt(raiz->dir);
     return 1 + (ae > ad ? ae : ad);
   }
 }
 
-void roda_dir(Arv **p) {
-  Arv *aux = (*p)->esq;
-  (*p)->esq = aux->dir;
-  aux->dir = (*p);
-  *p = aux;
+void roda_dir(Arv **raiz) {
+  Arv *aux = (*raiz)->esq;
+  (*raiz)->esq = aux->dir;
+  aux->dir = (*raiz);
+  *raiz = aux;
 }
 
-void roda_esq(Arv **p) {
-  Arv *aux = (*p)->dir;
-  (*p)->dir = aux->esq;
-  aux->esq = (*p);
-  *p = aux;
+void roda_esq(Arv **raiz) {
+  Arv *aux = (*raiz)->dir;
+  (*raiz)->dir = aux->esq;
+  aux->esq = (*raiz);
+  *raiz = aux;
 }
 
-void balanco(Arv **p) {
-  if(*p != NULL){
+void balanco(Arv **raiz) {
+  if(*raiz != NULL){
     Arv *aux;
-    int fb = filhosAlt((*p)->dir) - filhosAlt((*p)->esq);
+    int fb = filhosAlt((*raiz)->dir) - filhosAlt((*raiz)->esq);
 
     if (fb <= -2) {
-      aux = (*p)->esq;
+      aux = (*raiz)->esq;
       fb = filhosAlt(aux->dir) - filhosAlt(aux->esq);
 
       if (fb > 0) {
-        roda_esq(&((*p)->esq));
-        roda_dir(p);
+        roda_esq(&((*raiz)->esq));
+        roda_dir(raiz);
         printf("\nRotação: Dupla Direita");
       } else {
-        roda_dir(p);
+        roda_dir(raiz);
         printf("\nRotação: Direita Simples");
       }
     } else if (fb >= 2) {
-      aux = (*p)->dir;
+      aux = (*raiz)->dir;
       fb = filhosAlt(aux->dir) - filhosAlt(aux->esq);
 
       if (fb < 0) {
-        roda_dir(&((*p)->dir));
-        roda_esq(p);
+        roda_dir(&((*raiz)->dir));
+        roda_esq(raiz);
         printf("\nRotação: Dupla Esquerda");
       } else {
-        roda_esq(p);
+        roda_esq(raiz);
         printf("\nRotação: Esquerda Simples");
       }
     }
@@ -100,18 +100,18 @@ void preordem(Arv *t) {
   }
 }
 
-void inserir(Arv **t, int n) {
-  if (*t == NULL) {
-    *t = (Arv *)malloc(sizeof(Arv));
-    (*t)->esq = NULL;
-    (*t)->dir = NULL;
-    (*t)->num = n;
-  } else if (n < (*t)->num)
-    inserir(&(*t)->esq, n);
-  else if (n > (*t)->num)
-    inserir(&(*t)->dir, n);
+void inserir(Arv **raiz, int n) {
+  if (*raiz == NULL) {
 
-  balanco(t);
+    *raiz = (Arv *)malloc(sizeof(Arv));
+    (*raiz)->esq = NULL;
+    (*raiz)->dir = NULL;
+    (*raiz)->num = n;
+
+  } else if (n < (*raiz)->num) inserir(&(*raiz)->esq, n);
+    else if (n > (*raiz)->num) inserir(&(*raiz)->dir, n);
+
+    balanco(raiz);
 }
 
 Arv *MaiorDireita(Arv **no) {
