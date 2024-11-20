@@ -29,6 +29,7 @@ int main(){
     printf("Altura da árvore: %d\n", altura(raiz));
     printf("Árvore In Ordem: \n");
     inordem(raiz);
+    printf("\n");
 
     return 0;
 }
