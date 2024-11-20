@@ -13,6 +13,7 @@ void rodarDireita(Node **raiz);
 void rodarEsquerda(Node **raiz);
 void balanceamento(Node **raiz);
 void inserir(Node **raiz, int chave);
+void inordem(Node *raiz);
 
 int main(){
 
@@ -26,6 +27,8 @@ int main(){
     inserir(&raiz, 25);
 
     printf("Altura da árvore: %d\n", altura(raiz));
+    printf("Árvore In Ordem: \n");
+    inordem(raiz);
 
     return 0;
 }
@@ -105,4 +108,13 @@ void inserir(Node **raiz, int chave){
     else if((*raiz)->chave > chave) inserir(&(*raiz)->esquerda, chave);
 
     balanceamento(raiz);
+}
+
+void inordem(Node *raiz){
+
+    if(raiz!= NULL){
+        inordem(raiz->esquerda);
+        printf("%d ", raiz->chave);
+        inordem(raiz->direita);
+    }
 }
