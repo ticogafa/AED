@@ -1,176 +1,181 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct arv {
-  int num;
-  struct arv *esq;
-  struct arv *dir;
-} Arv;
+typedef struct Node {
 
-int filhosAlt(Arv *r);
-void roda_dir(Arv **p);
-void roda_esq(Arv **p);
-void balanco(Arv **p);
-void inserir(Arv **t, int num);
-void preordem(Arv *t);
-void remover(Arv **pRaiz, int numero);
-Arv *MaiorDireita(Arv **no);
+    int chave;
+    struct Node *esquerda, *direita;
 
-int main() {
-  Arv *t = NULL;
+}Node;
 
-  inserir(&t, 6);
-  inserir(&t, 10);
-  inserir(&t, 15);
-  printf("\n>>Rotação devido a inserção do 15\n");
+int altura(Node *raiz);
+void rodarDireita(Node **raiz);
+void rodarEsquerda(Node **raiz);
+void balanceamento(Node **raiz);
+void inserir(Node **raiz, int chave);
+void inordem(Node *raiz);
+Node *MaiorDireita(Node **raiz);
+void remover(Node **raiz, int chave);
 
-  inserir(&t, 3);
-  inserir(&t, 1);
-  printf("\n>>Rotação devido a inserção do 1\n");
+int main(){
 
-  printf("\nPRE-ordem:");
-  preordem(t);
-  printf("\n");
+    Node *raiz = NULL;
 
-  return 0;
-}
+    inserir(&raiz, 10);
+    inserir(&raiz, 20);
+    inserir(&raiz, 30);
+    inserir(&raiz, 40);
+    inserir(&raiz, 50);
+    inserir(&raiz, 25);
 
-int filhosAlt(Arv *r) {
-  if (r == NULL)
+    printf("Altura da árvore: %d\n", altura(raiz));
+    printf("Árvore In Ordem: \n");
+    inordem(raiz);
+    printf("\n");
+
+    remover(&raiz, 30);
+    printf("Árvore após remoção do número 30: \n");
+    inordem(raiz);
+    printf("\n");
+
     return 0;
-  else {
-    int ae = filhosAlt(r->esq);
-    int ad = filhosAlt(r->dir);
-    return 1 + (ae > ad ? ae : ad);
-  }
 }
 
-void roda_dir(Arv **p) {
-  Arv *aux = (*p)->esq;
-  (*p)->esq = aux->dir;
-  aux->dir = (*p);
-  *p = aux;
+int altura(Node *raiz){
+    if(raiz  == NULL) return -1;
+    
+    int alturaEsquerda = altura(raiz->esquerda);
+    int alturaDireita = altura(raiz->direita);
+
+    if(alturaEsquerda>alturaDireita) return alturaEsquerda + 1;
+    else return alturaDireita + 1;
+
 }
 
-void roda_esq(Arv **p) {
-  Arv *aux = (*p)->dir;
-  (*p)->dir = aux->esq;
-  aux->esq = (*p);
-  *p = aux;
+void rodarDireita(Node **raiz){
+
+    Node *aux = (*raiz)->esquerda;
+    (*raiz)->esquerda = aux->direita;
+    aux->direita = *raiz;
+    *raiz = aux;
 }
 
-void balanco(Arv **p) {
-  if(*p != NULL){
-    Arv *aux;
-    int fb = filhosAlt((*p)->dir) - filhosAlt((*p)->esq);
+void rodarEsquerda(Node **raiz){
 
-    if (fb <= -2) {
-      aux = (*p)->esq;
-      fb = filhosAlt(aux->dir) - filhosAlt(aux->esq);
-
-      if (fb > 0) {
-        roda_esq(&((*p)->esq));
-        roda_dir(p);
-        printf("\nRotação: Dupla Direita");
-      } else {
-        roda_dir(p);
-        printf("\nRotação: Direita Simples");
-      }
-    } else if (fb >= 2) {
-      aux = (*p)->dir;
-      fb = filhosAlt(aux->dir) - filhosAlt(aux->esq);
-
-      if (fb < 0) {
-        roda_dir(&((*p)->dir));
-        roda_esq(p);
-        printf("\nRotação: Dupla Esquerda");
-      } else {
-        roda_esq(p);
-        printf("\nRotação: Esquerda Simples");
-      }
-    }
-  }
+    Node *aux = (*raiz)->direita;
+    (*raiz)->direita = aux->esquerda;
+    aux->esquerda = *raiz;
+    *raiz = aux;
 }
 
-void preordem(Arv *t) {
-  if (t != NULL) {
-    printf("%d ", t->num);
-    preordem(t->esq);
-    preordem(t->dir);
-  }
-}
+void balanceamento(Node **raiz){
 
-void inserir(Arv **t, int n) {
-  if (*t == NULL) {
-    *t = (Arv *)malloc(sizeof(Arv));
-    (*t)->esq = NULL;
-    (*t)->dir = NULL;
-    (*t)->num = n;
-  } else if (n < (*t)->num)
-    inserir(&(*t)->esq, n);
-  else if (n > (*t)->num)
-    inserir(&(*t)->dir, n);
+if(*raiz != NULL){
 
-  balanco(t);
-}
 
-Arv *MaiorDireita(Arv **no) {
-  if ((*no)->dir != NULL)
-    return MaiorDireita(&(*no)->dir);
-  else {
-    Arv *aux = *no;
-    if ((*no)->esq != NULL) {
-      *no = (*no)->esq;
-    } else {
-      *no = NULL;
-    }
-    return aux;
-  }
-}
+    Node *aux;
+    int fatorBalanceamento = altura((*raiz)->direita) - altura((*raiz)->esquerda);
 
-void remover(Arv **pRaiz, int numero) {
-  if (*pRaiz == NULL) {
-    printf("\nRemoção: Numero nao existe na arvore!");
-    return;
-  }
-  else if (numero < (*pRaiz)->num)
-    remover(&(*pRaiz)->esq, numero);
-  else if (numero > (*pRaiz)->num)
-    remover(&(*pRaiz)->dir, numero);
-  else {
-    Arv *pAux = *pRaiz;
-    // 01 - no sem filhos
-    if (((*pRaiz)->esq == NULL) && ((*pRaiz)->dir == NULL)) {
-      free(pAux);
-      (*pRaiz) = NULL;
-    } 
-    else {
-      // 02 - no com filho direito
-      if ((*pRaiz)->esq == NULL) {
-        (*pRaiz) = (*pRaiz)->dir;
-        pAux->dir = NULL;
-        free(pAux);
-        pAux = NULL;
-      } 
-      else {
-        // 02 - no com filho esquerdo
-        if ((*pRaiz)->dir == NULL) {
-          (*pRaiz) = (*pRaiz)->esq;
-          pAux->esq = NULL;
-          free(pAux);
-          pAux = NULL;
-        } else {
-          // 03 - no com dois filhos
-          pAux = MaiorDireita(&(*pRaiz)->esq);
-          pAux->esq = (*pRaiz)->esq;
-          pAux->dir = (*pRaiz)->dir;
-          (*pRaiz)->esq = (*pRaiz)->dir = NULL;
-          free((*pRaiz));
-          *pRaiz = pAux;
-          pAux = NULL;
+    if(fatorBalanceamento < -1){
+        aux = (*raiz)->esquerda;
+        fatorBalanceamento = altura(aux->direita) - altura(aux->esquerda);
+
+        if(fatorBalanceamento > 0){
+            rodarEsquerda(&(*raiz)->esquerda);
+            rodarDireita(raiz);
+            printf("Rotação dupla à direita\n");
+        }else{
+            rodarDireita(raiz);
+            printf("Rotação direita simples\n");
         }
-      }
+    }else if(fatorBalanceamento > 1){
+        aux = (*raiz)->direita;
+        fatorBalanceamento = altura(aux->direita) - altura(aux->esquerda);
+
+        if(fatorBalanceamento < 0){
+            rodarDireita(&(*raiz)->direita);
+            rodarEsquerda(raiz);
+            printf("Rotação dupla à esquerda\n");
+        }else {
+            rodarEsquerda(raiz);
+            printf("Rotação simples à esquerda\n");
+        }
     }
-  }
-  balanco(pRaiz);
+
+}
+}
+
+void inserir(Node **raiz, int chave){
+    if(*raiz == NULL){
+
+        *raiz = (Node *)malloc(sizeof(Node));
+        (*raiz)->esquerda = NULL;
+        (*raiz)->direita = NULL;
+        (*raiz)->chave = chave;
+    }else if((*raiz)->chave < chave) inserir(&(*raiz)->direita, chave);
+    else if((*raiz)->chave > chave) inserir(&(*raiz)->esquerda, chave);
+
+    balanceamento(raiz);
+}
+
+void inordem(Node *raiz){
+
+    if(raiz!= NULL){
+        inordem(raiz->esquerda);
+        printf("%d ", raiz->chave);
+        inordem(raiz->direita);
+    }
+}
+
+Node *MaiorDireita(Node **raiz){
+
+    if((*raiz)->direita != NULL) return MaiorDireita(&(*raiz)->direita);
+    else{
+
+        Node *aux = *raiz;
+
+        if((*raiz)->esquerda != NULL) *raiz = (*raiz)->esquerda;
+        else *raiz = NULL;
+        return aux;
+    }
+}
+
+void remover(Node **raiz, int chave){
+
+    if(*raiz == NULL){
+        printf("Número não existe na árvore\n");
+        return;
+    }else if((*raiz)->chave < chave) remover(&(*raiz)->direita, chave);
+    else if((*raiz)->chave > chave) remover(&(*raiz)->esquerda, chave);
+    else{
+        Node *aux = *raiz;
+        
+        if((*raiz)->esquerda == NULL && (*raiz)->direita == NULL){
+            free(aux);
+            (*raiz) = NULL;
+        }else{
+            if((*raiz)->esquerda == NULL){
+                *raiz = (*raiz)->direita;
+                aux->direita = NULL;
+                free(aux);
+                aux = NULL;
+            }else{
+                if((*raiz)->direita == NULL){
+                *raiz = (*raiz)->esquerda;
+                aux->esquerda = NULL;
+                free(aux);
+                aux = NULL;
+            }else{
+                aux = MaiorDireita(&(*raiz)->esquerda);
+                aux->esquerda = (*raiz)->esquerda;
+                aux->direita = (*raiz)->direita;
+                (*raiz)->esquerda = (*raiz)->direita = NULL;
+                free(*raiz);
+                *raiz = aux;
+                aux = NULL;
+            }
+            } 
+        }
+    }
+    balanceamento(raiz);
 }
