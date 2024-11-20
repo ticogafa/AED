@@ -152,7 +152,7 @@ void remover(Node **raiz, int chave){
         
         if((*raiz)->esquerda == NULL && (*raiz)->direita == NULL){
             free(aux);
-            (*raiz) = NULL;
+            (*raiz) = NULL; 
         }else{
             if((*raiz)->esquerda == NULL){
                 *raiz = (*raiz)->direita;
