@@ -14,6 +14,8 @@ void rodarEsquerda(Node **raiz);
 void balanceamento(Node **raiz);
 void inserir(Node **raiz, int chave);
 void inordem(Node *raiz);
+Node *MaiorDireita(Node **raiz);
+void remover(Node **raiz, int chave);
 
 int main(){
 
@@ -28,6 +30,11 @@ int main(){
 
     printf("Altura da árvore: %d\n", altura(raiz));
     printf("Árvore In Ordem: \n");
+    inordem(raiz);
+    printf("\n");
+
+    remover(&raiz, 30);
+    printf("Árvore após remoção do número 30: \n");
     inordem(raiz);
     printf("\n");
 
@@ -137,7 +144,7 @@ void remover(Node **raiz, int chave){
 
     if(*raiz == NULL){
         printf("Número não existe na árvore\n");
-        return -1;
+        return;
     }else if((*raiz)->chave < chave) remover(&(*raiz)->direita, chave);
     else if((*raiz)->chave > chave) remover(&(*raiz)->esquerda, chave);
     else{
