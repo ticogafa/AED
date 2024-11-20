@@ -119,3 +119,16 @@ void inordem(Node *raiz){
         inordem(raiz->direita);
     }
 }
+
+Node *MaiorDireita(Node **raiz){
+
+    if((*raiz)->direita != NULL) return MaiorDireita(&(*raiz)->direita);
+    else{
+
+        Node *aux = *raiz;
+
+        if((*raiz)->esquerda != NULL) *raiz = (*raiz)->esquerda;
+        else *raiz = NULL;
+        return aux;
+    }
+}
