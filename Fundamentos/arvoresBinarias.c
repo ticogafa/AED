@@ -16,18 +16,22 @@ Node* encontrarMaior(Node *raiz);
 Node* MaiorDireita(Node **raiz);
 void remover(Node **raiz, int chave);
 int altura(Node *raiz);
+void filhosEsquerdos(Node *raiz);
 
 int main(){
 
     Node *raiz = NULL;
 
-    inserir(&raiz, 50);
-    inserir(&raiz, 30);
-    inserir(&raiz, 70);
-    inserir(&raiz, 20);
-    inserir(&raiz, 40);
-    inserir(&raiz, 60);
-    inserir(&raiz, 80);
+    inserir(&raiz, 4);
+    inserir(&raiz, 2);
+    inserir(&raiz, 7);
+    inserir(&raiz, 1);
+    inserir(&raiz, 3);
+    inserir(&raiz, 5);
+    inserir(&raiz, 8);
+
+    printf("\nFilhos esquerdos da árvore: \n");
+    filhosEsquerdos(raiz);
 
     printf("Pre-ordem: ");
     preordem(raiz);
@@ -43,13 +47,13 @@ int main(){
 
     printf("Altura da árvore: %d\n", altura(raiz));
 
-    int chave = 40;
+    int chave = 2;
     if(buscar(raiz, chave))
         printf("Chave %d encontrada na árvore.\n", chave);
     else
         printf("Chave %d não encontrada na árvore.\n", chave);
 
-    remover(&raiz, 50);
+    remover(&raiz, 7);
     printf("Árvore após remover a chave 50 (in-ordem): ");
     inordem(raiz);
     printf("\n");
@@ -169,4 +173,15 @@ int altura(Node *raiz){
         if(alturaEsquerda > alturaDireita) return alturaEsquerda + 1;
         else return alturaDireita + 1;
     }
+}
+
+void filhosEsquerdos(Node *raiz){
+    if(raiz == NULL || raiz->esquerda == NULL) return;
+    if(raiz->esquerda != NULL){
+        filhosEsquerdos(raiz->esquerda);
+        printf("%d ", raiz->esquerda->chave);
+    }
+
+    filhosEsquerdos(raiz->direita);
+    
 }
