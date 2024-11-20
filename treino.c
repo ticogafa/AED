@@ -44,8 +44,50 @@ void rodarEsquerda(Node **raiz){
 
 void balanceamento(Node **raiz){
 
+if(*raiz != NULL){
+
+
     Node *aux;
     int fatorBalanceamento = altura((*raiz)->direita) - altura((*raiz)->esquerda);
 
-    
+    if(fatorBalanceamento < -1){
+        aux = (*raiz)->esquerda;
+        fatorBalanceamento = altura(aux->direita) - altura(aux->esquerda);
+
+        if(fatorBalanceamento > 0){
+            rodarEsquerda(&(*raiz)->esquerda);
+            rodarDireita(raiz);
+            printf("Rotação dupla à direita\n");
+        }else{
+            rodarDireita(raiz);
+            printf("Rotação direita simples\n");
+        }
+    }else if(fatorBalanceamento > 1){
+        aux = (*raiz)->direita;
+        fatorBalanceamento = altura(aux->direita) - altura(aux->esquerda);
+
+        if(fatorBalanceamento < 0){
+            rodarDireita(&(*raiz)->direita);
+            rodarEsquerda(raiz);
+            printf("Rotação dupla à esquerda\n");
+        }else {
+            rodarEsquerda(raiz);
+            printf("Rotação simples à esquerda\n");
+        }
+    }
+
+}
+}
+
+void inserir(Node **raiz, int chave){
+    if(*raiz == NULL){
+
+        *raiz = (Node *)malloc(sizeof(Node));
+        (*raiz)->esquerda = NULL;
+        (*raiz)->direita = NULL;
+        (*raiz)->chave = chave;
+    }else if((*raiz)->chave < chave) inserir(&(*raiz)->direita, chave);
+    else if((*raiz)->chave > chave) inserir(&(*raiz)->esquerda, chave);
+
+    balanceamento(raiz);
 }

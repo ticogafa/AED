@@ -69,7 +69,7 @@ void balanco(Arv **raiz) {
       fatorBalanceamento = filhosAlt(aux->dir) - filhosAlt(aux->esq);
 
       if (fatorBalanceamento > 0) {
-        roda_esq(&((*raiz)->esq));
+        roda_esq(&((*raiz)->esq));  
         roda_dir(raiz);
         printf("\nRotação: Dupla Direita");
       } else {
