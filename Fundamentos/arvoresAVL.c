@@ -128,49 +128,49 @@ Arv *MaiorDireita(Arv **raiz) {
   }
 }
 
-void remover(Arv **pRaiz, int numero) {
-  if (*pRaiz == NULL) {
+void remover(Arv **raiz, int numero) {
+  if (*raiz == NULL) {
     printf("\nRemoção: Numero nao existe na arvore!");
     return;
   }
-  else if (numero < (*pRaiz)->num)
-    remover(&(*pRaiz)->esq, numero);
-  else if (numero > (*pRaiz)->num)
-    remover(&(*pRaiz)->dir, numero);
+  else if (numero < (*raiz)->num)
+    remover(&(*raiz)->esq, numero);
+  else if (numero > (*raiz)->num)
+    remover(&(*raiz)->dir, numero);
   else {
-    Arv *pAux = *pRaiz;
+    Arv *aux = *raiz;
     // 01 - no sem filhos
-    if (((*pRaiz)->esq == NULL) && ((*pRaiz)->dir == NULL)) {
-      free(pAux);
-      (*pRaiz) = NULL;
+    if (((*raiz)->esq == NULL) && ((*raiz)->dir == NULL)) {
+      free(aux);
+      (*raiz) = NULL;
     } 
     else {
       // 02 - no com filho direito
-      if ((*pRaiz)->esq == NULL) {
-        (*pRaiz) = (*pRaiz)->dir;
-        pAux->dir = NULL;
-        free(pAux);
-        pAux = NULL;
+      if ((*raiz)->esq == NULL) {
+        (*raiz) = (*raiz)->dir;
+        aux->dir = NULL;
+        free(aux);
+        aux = NULL;
       } 
       else {
         // 02 - no com filho esquerdo
-        if ((*pRaiz)->dir == NULL) {
-          (*pRaiz) = (*pRaiz)->esq;
-          pAux->esq = NULL;
-          free(pAux);
-          pAux = NULL;
+        if ((*raiz)->dir == NULL) {
+          (*raiz) = (*raiz)->esq;
+          aux->esq = NULL;
+          free(aux);
+          aux = NULL;
         } else {
           // 03 - no com dois filhos
-          pAux = MaiorDireita(&(*pRaiz)->esq);
-          pAux->esq = (*pRaiz)->esq;
-          pAux->dir = (*pRaiz)->dir;
-          (*pRaiz)->esq = (*pRaiz)->dir = NULL;
-          free((*pRaiz));
-          *pRaiz = pAux;
-          pAux = NULL;
+          aux = MaiorDireita(&(*raiz)->esq);
+          aux->esq = (*raiz)->esq;
+          aux->dir = (*raiz)->dir;
+          (*raiz)->esq = (*raiz)->dir = NULL;
+          free((*raiz));
+          *raiz = aux;
+          aux = NULL;
         }
       }
     }
   }
-  balanco(pRaiz);
+  balanco(raiz);
 }
