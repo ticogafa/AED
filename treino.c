@@ -132,3 +132,43 @@ Node *MaiorDireita(Node **raiz){
         return aux;
     }
 }
+
+void remover(Node **raiz, int chave){
+
+    if(*raiz == NULL){
+        printf("Número não existe na árvore\n");
+        return -1;
+    }else if((*raiz)->chave < chave) remover(&(*raiz)->direita, chave);
+    else if((*raiz)->chave > chave) remover(&(*raiz)->esquerda, chave);
+    else{
+        Node *aux = *raiz;
+        
+        if((*raiz)->esquerda == NULL && (*raiz)->direita == NULL){
+            free(aux);
+            (*raiz) = NULL;
+        }else{
+            if((*raiz)->esquerda == NULL){
+                *raiz = (*raiz)->direita;
+                aux->direita = NULL;
+                free(aux);
+                aux = NULL;
+            }else{
+                if((*raiz)->direita == NULL){
+                *raiz = (*raiz)->esquerda;
+                aux->esquerda = NULL;
+                free(aux);
+                aux = NULL;
+            }else{
+                aux = MaiorDireita(&(*raiz)->esquerda);
+                aux->esquerda = (*raiz)->esquerda;
+                aux->direita = (*raiz)->direita;
+                (*raiz)->esquerda = (*raiz)->direita = NULL;
+                free(*raiz);
+                *raiz = aux;
+                aux = NULL;
+            }
+            } 
+        }
+    }
+    balanceamento(raiz);
+}
