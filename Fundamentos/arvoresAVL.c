@@ -62,13 +62,13 @@ void roda_esq(Arv **raiz) {
 void balanco(Arv **raiz) {
   if(*raiz != NULL){
     Arv *aux;
-    int fb = filhosAlt((*raiz)->dir) - filhosAlt((*raiz)->esq);
+    int fatorBalanceamento = filhosAlt((*raiz)->dir) - filhosAlt((*raiz)->esq);
 
-    if (fb <= -2) {
+    if (fatorBalanceamento <= -2) {
       aux = (*raiz)->esq;
-      fb = filhosAlt(aux->dir) - filhosAlt(aux->esq);
+      fatorBalanceamento = filhosAlt(aux->dir) - filhosAlt(aux->esq);
 
-      if (fb > 0) {
+      if (fatorBalanceamento > 0) {
         roda_esq(&((*raiz)->esq));
         roda_dir(raiz);
         printf("\nRotação: Dupla Direita");
@@ -76,11 +76,11 @@ void balanco(Arv **raiz) {
         roda_dir(raiz);
         printf("\nRotação: Direita Simples");
       }
-    } else if (fb >= 2) {
+    } else if (fatorBalanceamento >= 2) {
       aux = (*raiz)->dir;
-      fb = filhosAlt(aux->dir) - filhosAlt(aux->esq);
+      fatorBalanceamento = filhosAlt(aux->dir) - filhosAlt(aux->esq);
 
-      if (fb < 0) {
+      if (fatorBalanceamento < 0) {
         roda_dir(&((*raiz)->dir));
         roda_esq(raiz);
         printf("\nRotação: Dupla Esquerda");

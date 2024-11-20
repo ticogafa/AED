@@ -42,3 +42,10 @@ void rodarEsquerda(Node **raiz){
     *raiz = aux;
 }
 
+void balanceamento(Node **raiz){
+
+    Node *aux;
+    int fatorBalanceamento = altura((*raiz)->direita) - altura((*raiz)->esquerda);
+
+    
+}
