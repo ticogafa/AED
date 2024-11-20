@@ -15,16 +15,30 @@ int main(){
     return 0;
 }
 
-int filhosAlt(Node *raiz){
-    if(raiz == NULL) return 0;
-    else{
+int altura(Node *raiz){
+    if(raiz  == NULL) return -1;
+    
+    int alturaEsquerda = altura(raiz->esquerda);
+    int alturaDireita = altura(raiz->direita);
 
-        int ae = filhosAlt(raiz->esquerda);
-        int ad = filhosAlt(raiz->direita);
-        int maior;
+    if(alturaEsquerda>alturaDireita) return alturaEsquerda + 1;
+    else return alturaDireita + 1;
 
-        if (ae > ad) maior = ae;
-        else maior = ad;   
-        return 1 + maior;
-    }
 }
+
+void rodarDireita(Node **raiz){
+
+    Node *aux = (*raiz)->esquerda;
+    (*raiz)->esquerda = aux->direita;
+    aux->direita = *raiz;
+    *raiz = aux;
+}
+
+void rodarEsquerda(Node **raiz){
+
+    Node *aux = (*raiz)->direita;
+    (*raiz)->direita = aux->esquerda;
+    aux->esquerda = *raiz;
+    *raiz = aux;
+}
+
