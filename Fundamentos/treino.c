@@ -56,22 +56,13 @@ void intercala(int inicio, int meio, int final, int v[]){
     int posLivre = 0;
     int aux[TAMANHO];
 
-    while(inicio1 <= meio && inicio2<=final){
-        if(v[inicio1]<=v[inicio2]){
-            aux[posLivre++] = v[inicio1++];
-        }else{
-            aux[posLivre++] = v[inicio2++];
-        }
+    while(inicio1<=meio && inicio2<=final){
+        if(v[inicio1]<=v[inicio2]) aux[posLivre++] = v[inicio1++];
+        else aux[posLivre++] = v[inicio2++];
     }
 
-    while(inicio1<=meio){
-        aux[posLivre++] = v[inicio1++];
-    }
-    while(inicio2<=final){
-        aux[posLivre++] = v[inicio2++];
-    }
+    while(inicio1<=meio) aux[posLivre++] = v[inicio1++];
+    while(inicio2<=final) aux[posLivre++] = v[inicio2++];
 
-    for(inicio1 = inicio; inicio1 <= final; inicio1++){
-        v[inicio1] = aux[inicio1 - inicio];
-    }
+    for(inicio1 = inicio; inicio1<=final; inicio1++) v[inicio1] = aux[inicio1 - inicio];
 }
