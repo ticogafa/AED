@@ -41,7 +41,7 @@ int main(){
 void mergeSort(int inicio, int final, int v[]){
     if(inicio < final){
 
-        int meio = (inicio + final) / 2;
+        int meio = (inicio + final)/2;
 
         mergeSort(inicio, meio, v);
         mergeSort(meio + 1, final, v);
@@ -64,5 +64,5 @@ void intercala(int inicio, int meio, int final, int v[]){
     while(inicio1<=meio) aux[posLivre++] = v[inicio1++];
     while(inicio2<=final) aux[posLivre++] = v[inicio2++];
 
-    for(inicio1 = inicio; inicio1<=final; inicio1++) v[inicio1] = aux[inicio1 - inicio];
+    for(inicio1 = inicio; inicio1 <= final; inicio1++) v[inicio1] = aux[inicio1 - inicio];
 }
