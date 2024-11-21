@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-void quickSort(int v[], int inicio, int fim);
-int particao(int v[], int inicio, int fim);
+void quickSort(int inicio, int fim, int v[]);
+int particao(int inicio, int fim, int v[]);
 void troca(int v[], int i, int j);
 
 int main() {
@@ -17,7 +17,7 @@ int main() {
     for(i = 0; i < n; i++) {
         printf("%d ", vetor[i]);
     }
-    quickSort(vetor, 0, n - 1);
+    quickSort(0, n - 1, vetor);
     printf("\nVetor ordenado:\n");
     for(i = 0; i < n; i++) {
         printf("%d ", vetor[i]);
@@ -30,19 +30,19 @@ int main() {
     return 0;
 }
 
-void quickSort(int v[], int inicio, int fim){
+void quickSort(int inicio, int fim, int v[]){
     
     if(inicio<fim){
 
-        int indice = particao(v, inicio, fim);
+        int indice = particao(inicio, fim, v);
 
-        quickSort(v, inicio, indice-1);
-        quickSort(v, indice+1, fim);
+        quickSort(inicio, indice-1, v);
+        quickSort(indice+1, fim, v);
 
     }
 }
 
-int particao(int v[], int inicio, int fim){ 
+int particao(int inicio, int fim, int v[]){ 
 
     int pivo = v[inicio];
     int i;
