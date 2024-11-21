@@ -45,16 +45,13 @@ void quickSort(int inicio, int fim, int v[]){
 int particao(int inicio, int fim, int v[]){ 
 
     int pivo = v[inicio];
-    int i;
     int indice = fim;
 
-    for(i = fim; i > inicio; i--){
+    for(int i = fim; i > inicio; i--){
 
         if(v[i] >= pivo){
-
             troca(v, i, indice);
             indice--;
-        
         }
     }
 
